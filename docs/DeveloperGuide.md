@@ -281,10 +281,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new player               | keep track of the team players                                         |
 | `* * *`  | user                                       | delete a player                | remove players who have left the team                                  |
 | `* * *`  | user                                       | edit a player's details        | update their stats, IGN, or contact information without removing other details |
-| * * *  | user                                       | list all players               | view all players in the team                                           |
-| * * *  | user                                       | find a player by name          | locate details of players without having to go through the entire list |
-| * * *  | user with many players in the address book | sort players by stats          | identify top performers easily                                         |
-| * * *  | user                                       | view player availability status| know who is available for a practice match                             |
+| `* * *`  | user                                       | list all players               | view all players in the team                                           |
+| `* * *`  | user                                       | find a player by name          | locate details of players without having to go through the entire list |
+| `* * *`  | user with many players in the address book | sort players by stats          | identify top performers easily                                         |
+| `* * *`  | user                                       | view player availability status| know who is available for a practice match                             |
 
 *{More to be added}*
 
