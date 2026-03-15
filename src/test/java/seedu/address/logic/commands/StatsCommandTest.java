@@ -73,7 +73,8 @@ public class StatsCommandTest {
         final EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
 
         // same values -> returns true
-        EditStatsDescriptor descriptorWithSameValues = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+        EditStatsDescriptor descriptorWithSameValues =
+            new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
         org.junit.jupiter.api.Assertions.assertTrue(descriptor.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -86,7 +87,8 @@ public class StatsCommandTest {
         org.junit.jupiter.api.Assertions.assertFalse(descriptor.equals(5));
 
         // different values -> returns false
-        EditStatsDescriptor descriptorWithDifferentValues = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_2).build();
+        EditStatsDescriptor descriptorWithDifferentValues =
+            new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_2).build();
         org.junit.jupiter.api.Assertions.assertFalse(descriptor.equals(descriptorWithDifferentValues));
     }
 
