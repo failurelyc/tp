@@ -46,4 +46,11 @@ public class StatisticsTest {
         Statistics stats = new Statistics.Builder().withKills(new Kills("10")).build();
         assertEquals("Kills: 10", stats.toString());
     }
+
+    @Test
+    public void hashCodeMethod() {
+        Statistics stats1 = new Statistics.Builder().withKills(new Kills("10")).build();
+        Statistics stats2 = new Statistics.Builder().withKills(new Kills("10")).build();
+        assertEquals(stats1.hashCode(), stats2.hashCode());
+    }
 }

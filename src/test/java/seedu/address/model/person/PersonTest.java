@@ -102,4 +102,16 @@ public class PersonTest {
                 + ", statistics=" + ALICE.getStatistics() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void getStatistics_success() {
+        Person person = new PersonBuilder(ALICE).withStatistics(VALID_STATS_SET_1).build();
+        assertEquals(VALID_STATS_SET_1, person.getStatistics());
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+    }
 }

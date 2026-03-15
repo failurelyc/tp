@@ -1,5 +1,6 @@
 package seedu.address.model.person.statistics;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -54,5 +55,12 @@ public class KillsTest {
 
         // different values -> returns false
         assertFalse(kills.equals(new Kills("20")));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        Kills kills1 = new Kills("10");
+        Kills kills2 = new Kills("10");
+        assertEquals(kills1.hashCode(), kills2.hashCode());
     }
 }

@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.STATS_DESC_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_KILLS_SET_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATS_SET_1;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -10,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.StatsCommand.EditStatsDescriptor;
 import seedu.address.model.AddressBook;
@@ -55,5 +58,44 @@ public class StatsCommandTest {
         EditStatsDescriptor differentDescriptor = new EditStatsDescriptorBuilder().withKills("999").build();
         org.junit.jupiter.api.Assertions.assertFalse(statsFirstCommand
             .equals(new StatsCommand(INDEX_FIRST_PERSON, differentDescriptor)));
+    }
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+        StatsCommand statsCommand = new StatsCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(statsCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void editStatsDescriptor_equals() {
+        final EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+
+        // same values -> returns true
+        EditStatsDescriptor descriptorWithSameValues = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_1).build();
+        org.junit.jupiter.api.Assertions.assertTrue(descriptor.equals(descriptorWithSameValues));
+
+        // same object -> returns true
+        org.junit.jupiter.api.Assertions.assertTrue(descriptor.equals(descriptor));
+
+        // null -> returns false
+        org.junit.jupiter.api.Assertions.assertFalse(descriptor.equals(null));
+
+        // different types -> returns false
+        org.junit.jupiter.api.Assertions.assertFalse(descriptor.equals(5));
+
+        // different values -> returns false
+        EditStatsDescriptor descriptorWithDifferentValues = new EditStatsDescriptorBuilder().withKills(VALID_KILLS_SET_2).build();
+        org.junit.jupiter.api.Assertions.assertFalse(descriptor.equals(descriptorWithDifferentValues));
+    }
+
+    @Test
+    public void isAnyFieldEdited() {
+        EditStatsDescriptor descriptor = new EditStatsDescriptor();
+        org.junit.jupiter.api.Assertions.assertFalse(descriptor.isAnyFieldEdited());
+
+        descriptor.setKills(new seedu.address.model.person.statistics.Kills(VALID_KILLS_SET_1));
+        org.junit.jupiter.api.Assertions.assertTrue(descriptor.isAnyFieldEdited());
     }
 }
