@@ -11,6 +11,9 @@ public class Role {
 
     public static final String MESSAGE_CONSTRAINTS = "Role should be one of: TOP, BOT, MID, SUPPORT, JUNGLE";
 
+    /**
+     * Represents the set of supported League of Legends roles.
+     */
     public enum RoleType {
         TOP, BOT, MID, SUPPORT, JUNGLE
     }

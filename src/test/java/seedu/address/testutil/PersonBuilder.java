@@ -8,8 +8,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.statistics.Statistics;
 import seedu.address.model.person.Role;
+import seedu.address.model.person.statistics.Statistics;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -105,7 +105,7 @@ public class PersonBuilder {
         this.statistics = statistics;
         return this;
     }
-    
+
     /**
      * Sets the {@code Role} of the {@code Person} that we are building.
      */
