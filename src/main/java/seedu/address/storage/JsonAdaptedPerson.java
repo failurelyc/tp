@@ -16,6 +16,7 @@ import seedu.address.model.person.InGameName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.statistics.Statistics;
 import seedu.address.model.tag.Tag;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String ign;
     private final String role;
+    private final String rank;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final JsonAdaptedStatistics statistics;
 
@@ -43,7 +45,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("ign") String ign, @JsonProperty("role") String role,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("rank") String rank, @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("statistics") JsonAdaptedStatistics statistics) {
         this.name = name;
         this.phone = phone;
@@ -51,6 +53,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.ign = ign;
         this.role = role;
+        this.rank = rank;
         this.statistics = statistics;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -67,6 +70,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         ign = source.getIgn().value;
         role = source.getRole().value.toString();
+        rank = source.getRank().toString();
         statistics = new JsonAdaptedStatistics(source.getStatistics());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -133,13 +137,21 @@ class JsonAdaptedPerson {
         }
         final InGameName modelIgn = new InGameName(ign);
 
+        if (rank == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rank.class.getSimpleName()));
+        }
+        if (!Rank.isValidRank(rank)) {
+            throw new IllegalValueException(Rank.MESSAGE_CONSTRAINTS);
+        }
+        final Rank modelRank = new Rank(rank);
+
         if (statistics == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Statistics"));
         }
         final Statistics modelStatistics = statistics.toModelType(); // Convert nested object
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelIgn, modelTags,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelIgn, modelRank, modelTags,
                 modelStatistics);
     }
 

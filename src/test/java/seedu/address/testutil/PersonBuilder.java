@@ -9,6 +9,7 @@ import seedu.address.model.person.InGameName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.statistics.Statistics;
 import seedu.address.model.tag.Tag;
@@ -25,6 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_ROLE = "MID";
     public static final String DEFAULT_IGN = "AmyBee88";
+    public static final String DEFAULT_RANK = "GOLD";
 
     private Name name;
     private Phone phone;
@@ -32,6 +34,7 @@ public class PersonBuilder {
     private Address address;
     private Role role;
     private InGameName ign;
+    private Rank rank;
     private Set<Tag> tags;
     private Statistics statistics;
 
@@ -45,6 +48,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         role = new Role(DEFAULT_ROLE);
         ign = new InGameName(DEFAULT_IGN);
+        rank = new Rank(DEFAULT_RANK);
         tags = new HashSet<>();
         statistics = Statistics.createDefault();
     }
@@ -59,6 +63,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         role = personToCopy.getRole();
         ign = personToCopy.getIgn();
+        rank = personToCopy.getRank();
         tags = new HashSet<>(personToCopy.getTags());
         statistics = personToCopy.getStatistics();
     }
@@ -127,8 +132,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Rank} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRank(String rank) {
+        this.rank = new Rank(rank);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, role, ign, tags, statistics);
+        return new Person(name, phone, email, address, role, ign, rank, tags, statistics);
     }
 
 }

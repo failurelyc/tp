@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RANK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STATS_SET_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -92,6 +93,10 @@ public class PersonTest {
 
         // different stats -> returns false
         editedAlice = new PersonBuilder(ALICE).withStatistics(VALID_STATS_SET_1).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different rank -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRank(VALID_RANK_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
