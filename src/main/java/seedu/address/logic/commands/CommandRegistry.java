@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import javafx.util.Pair;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.DeleteCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
@@ -19,6 +20,7 @@ import seedu.address.logic.parser.StatsCommandParser;
  * Parser and HelpCommand can access.
  */
 public class CommandRegistry {
+
     /**
      * Array of all available command classes.
      * This list should be updated whenever a new command is added.
@@ -47,6 +49,8 @@ public class CommandRegistry {
             StatsCommand.class, Optional.of(StatsCommandParser.class))
     );
 
+    private static final Logger logger = LogsCenter.getLogger(CommandRegistry.class);
+
     // Private constructor to prevent instantiation
     private CommandRegistry() {
         throw new AssertionError("CommandRegistry should not be instantiated");
@@ -61,6 +65,13 @@ public class CommandRegistry {
                     .getDeclaredField("MESSAGE_USAGE").get(null);
                 output += "\n";
             } catch (Exception e) {
+                try {
+                    output += (String) commandPair.getKey()
+                        .getDeclaredField("COMMAND_WORD").get(null);
+                    output += "\n";
+                } catch (Exception ex) {
+                    logger.severe("Error getting help string for command: " + ex.toString());
+                }
             }
         }
         return output;
