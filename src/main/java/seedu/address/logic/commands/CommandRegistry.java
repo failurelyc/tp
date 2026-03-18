@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +50,19 @@ public class CommandRegistry {
     // Private constructor to prevent instantiation
     private CommandRegistry() {
         throw new AssertionError("CommandRegistry should not be instantiated");
+    }
+
+    public static String getHelp() {
+        String output = "";
+        for (Pair<Class<? extends Command>, Optional<Class<? extends Parser<?>>>>
+            commandPair : CommandRegistry.COMMAND_CLASSES) {
+            try {
+                output += (String) commandPair.getKey()
+                    .getDeclaredField("MESSAGE_USAGE").get(null);
+                output += "\n";
+            } catch (Exception e) {
+            }
+        }
+        return output;
     }
 }
