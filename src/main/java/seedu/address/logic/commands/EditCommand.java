@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -29,6 +30,7 @@ import seedu.address.model.person.InGameName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rank;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.statistics.Statistics;
 import seedu.address.model.tag.Tag;
@@ -50,11 +52,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_IGN + "IGN] "
             + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_RANK + "RANK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_IGN + "JohnD99";
+            + PREFIX_RANK + "PLATINUM";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -110,10 +113,11 @@ public class EditCommand extends Command {
         InGameName updatedIgn = editPersonDescriptor.getIgn().orElse(personToEdit.getIgn());
         Statistics updatedStatistics = personToEdit.getStatistics();
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
+        Rank updatedRank = editPersonDescriptor.getRank().orElse(personToEdit.getRank());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole, updatedIgn,
-            updatedTags, updatedStatistics);
+            updatedRank, updatedTags, updatedStatistics);
     }
 
     @Override
@@ -151,6 +155,7 @@ public class EditCommand extends Command {
         private Address address;
         private InGameName ign;
         private Role role;
+        private Rank rank;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -166,6 +171,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setIgn(toCopy.ign);
             setRole(toCopy.role);
+            setRank(toCopy.rank);
             setTags(toCopy.tags);
         }
 
@@ -173,7 +179,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, ign, role, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, ign, role, rank, tags);
         }
 
         public void setName(Name name) {
@@ -224,6 +230,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(role);
         }
 
+        public void setRank(Rank rank) {
+            this.rank = rank;
+        }
+
+        public Optional<Rank> getRank() {
+            return Optional.ofNullable(rank);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -258,6 +272,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(role, otherEditPersonDescriptor.role)
+                    && Objects.equals(rank, otherEditPersonDescriptor.rank)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -269,6 +284,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("role", role)
+                    .add("rank", rank)
                     .add("tags", tags)
                     .toString();
         }

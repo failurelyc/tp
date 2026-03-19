@@ -26,6 +26,7 @@ public class Person {
     private final Address address;
     private final Role role;
     private final InGameName ign;
+    private final Rank rank;
     private final Set<Tag> tags = new HashSet<>();
     private final Statistics statistics;
 
@@ -33,14 +34,15 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Role role,
-        InGameName ign, Set<Tag> tags, Statistics statistics) {
-        requireAllNonNull(name, phone, email, address, role, ign, tags, statistics);
+        InGameName ign, Rank rank, Set<Tag> tags, Statistics statistics) {
+        requireAllNonNull(name, phone, email, address, role, ign, rank, tags, statistics);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.role = role;
         this.ign = ign;
+        this.rank = rank;
         this.tags.addAll(tags);
         this.statistics = statistics;
     }
@@ -67,6 +69,10 @@ public class Person {
 
     public InGameName getIgn() {
         return ign;
+    }
+
+    public Rank getRank() {
+        return rank;
     }
 
     /**
@@ -116,6 +122,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
                 && ign.equals(otherPerson.ign)
+                && rank.equals(otherPerson.rank)
                 && tags.equals(otherPerson.tags)
                 && statistics.equals(otherPerson.statistics);
     }
@@ -123,7 +130,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, ign, tags, statistics);
+        return Objects.hash(name, phone, email, address, role, ign, rank, tags, statistics);
     }
 
     @Override
@@ -134,6 +141,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("role", role)
+                .add("rank", rank)
                 .add("tags", tags)
                 .add("statistics", statistics)
                 .toString();
