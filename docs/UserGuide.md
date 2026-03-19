@@ -128,6 +128,18 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by name: `filter`
+
+Finds persons whose tags contain any of the given keywords.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `friend` will match `Fans`
+* Only the tags are searched.
+* Only full words will be matched e.g. `friend` will not match `friends`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `friends colleague` will return people who are tagged either `friends`, `colleague`, or both.
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -141,6 +153,15 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Drafting a team : `draft`
+
+Tests if a specific team composition is valid.
+
+Format: `draft INDEX INDEX INDEX INDEX INDEX`
+
+Example:
+ ![Sample output for valid composition](images/draftSuccess.png)
 
 ### Clearing all entries : `clear`
 
