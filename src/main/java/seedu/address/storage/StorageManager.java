@@ -23,17 +23,6 @@ public class StorageManager implements Storage {
     private MatchRecordStorage matchRecordStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
-     *
-     * @deprecated Update unit tests to use
-     *                 {@link #StorageManager(AddressBookStorage, MatchRecordStorage, UserPrefsStorage)} instead.
-     */
-    @Deprecated
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this(addressBookStorage, null, userPrefsStorage);
-    }
-
-    /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code MatchRecordStorage}.
      * and {@code UserPrefStorage}
      */
