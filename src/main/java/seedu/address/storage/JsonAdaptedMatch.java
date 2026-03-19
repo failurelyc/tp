@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,15 +14,15 @@ import seedu.address.model.match.Result;
 public class JsonAdaptedMatch {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Match's %s field is missing!";
+    public static final String INVALID_DATE_MESSAGE_FORMAT = "Invalid date format: %s";
 
     private final String date;
     private final String result;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code JsonAdaptedMatch} with the given match details.
      */
     public JsonAdaptedMatch(@JsonProperty("date") String date, @JsonProperty("result") String result) {
-        requireAllNonNull(result);
         this.result = result;
         this.date = date;
     }
@@ -46,10 +44,18 @@ public class JsonAdaptedMatch {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Date"));
         }
-        final LocalDateTime modelDate = LocalDateTime.parse(date);
+        final LocalDateTime modelDate;
+        try {
+            modelDate = LocalDateTime.parse(date);
+        } catch (Exception e) {
+            throw new IllegalValueException(String.format(INVALID_DATE_MESSAGE_FORMAT, date));
+        }
 
         if (result == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Result"));
+        }
+        if (!Result.isValidResult(result)) {
+            throw new IllegalValueException(Result.MESSAGE_CONSTRAINTS);
         }
         final Result modelResult = new Result(result);
 
