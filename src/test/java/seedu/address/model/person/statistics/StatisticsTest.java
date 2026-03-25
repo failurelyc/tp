@@ -70,6 +70,25 @@ public class StatisticsTest {
     }
 
     @Test
+    public void getKda() {
+        // Deaths > 0
+        Statistics stats1 = new Statistics.Builder()
+                .withKills(new Kills("5"))
+                .withAssists(new Assists("10"))
+                .withDeaths(new Deaths("2"))
+                .build();
+        assertEquals(7.5, stats1.getKda());
+
+        // Deaths = 0
+        Statistics stats2 = new Statistics.Builder()
+                .withKills(new Kills("5"))
+                .withAssists(new Assists("10"))
+                .withDeaths(new Deaths("0"))
+                .build();
+        assertEquals(15.0, stats2.getKda());
+    }
+
+    @Test
     public void toStringMethod() {
         Statistics stats = new Statistics.Builder()
             .withKills(new Kills("10"))

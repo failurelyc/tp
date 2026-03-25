@@ -58,6 +58,19 @@ public class AssistsTest {
     }
 
     @Test
+    public void add() {
+        Assists assists1 = new Assists("5");
+        Assists assists2 = new Assists("10");
+        assertEquals(new Assists("15"), assists1.add(assists2));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Assists assists = new Assists("15");
+        assertEquals("15", assists.toString());
+    }
+
+    @Test
     public void hashCodeMethod() {
         Assists assists1 = new Assists("10");
         Assists assists2 = new Assists("10");

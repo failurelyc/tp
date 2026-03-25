@@ -59,4 +59,29 @@ public class JsonAdaptedStatisticsTest {
         String expectedMessage = Deaths.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, statistics::toModelType);
     }
+
+    @Test
+    public void constructor_statisticsObject_success() throws Exception {
+        Statistics stats = new Statistics.Builder()
+                .withKills(new Kills(VALID_KILLS))
+                .withDeaths(new Deaths(VALID_DEATHS))
+                .withAssists(new Assists(VALID_ASSISTS))
+                .build();
+        JsonAdaptedStatistics jsonStats = new JsonAdaptedStatistics(stats);
+        assertEquals(stats, jsonStats.toModelType());
+    }
+
+    @Test
+    public void toModelType_nullAssists_throwsIllegalValueException() {
+        JsonAdaptedStatistics statistics = new JsonAdaptedStatistics(VALID_KILLS, VALID_DEATHS, null);
+        String expectedMessage = String.format("Statistics's assists field is missing!");
+        assertThrows(IllegalValueException.class, expectedMessage, statistics::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAssists_throwsIllegalValueException() {
+        JsonAdaptedStatistics statistics = new JsonAdaptedStatistics(VALID_KILLS, VALID_DEATHS, "-3");
+        String expectedMessage = Assists.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, statistics::toModelType);
+    }
 }
