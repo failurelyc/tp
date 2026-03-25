@@ -48,15 +48,15 @@ public class DraftCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> addressBookList = model.getAddressBook().getPersonList();
 
         // Validate all indices and collect players
         List<Person> selectedPlayers = new ArrayList<>();
         for (Index index : indices) {
-            if (index.getZeroBased() >= lastShownList.size()) {
+            if (index.getZeroBased() >= addressBookList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            selectedPlayers.add(lastShownList.get(index.getZeroBased()));
+            selectedPlayers.add(addressBookList.get(index.getZeroBased()));
         }
 
         // Validate composition and generate result message
