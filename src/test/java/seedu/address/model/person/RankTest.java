@@ -64,17 +64,17 @@ public class RankTest {
     @Test
     public void constructor_validRank_success() {
         // lower ranks with divisions
-        Rank goldI = new Rank("GOLD I");
-        assertEquals(Rank.RankTier.GOLD, goldI.tier);
-        assertEquals(Rank.Division.I, goldI.division);
+        Rank goldOne = new Rank("GOLD I");
+        assertEquals(Rank.RankTier.GOLD, goldOne.tier);
+        assertEquals(Rank.Division.I, goldOne.division);
 
-        Rank silverII = new Rank("SILVER II");
-        assertEquals(Rank.RankTier.SILVER, silverII.tier);
-        assertEquals(Rank.Division.II, silverII.division);
+        Rank silverTwo = new Rank("SILVER II");
+        assertEquals(Rank.RankTier.SILVER, silverTwo.tier);
+        assertEquals(Rank.Division.II, silverTwo.division);
 
-        Rank diamondIV = new Rank("DIAMOND IV");
-        assertEquals(Rank.RankTier.DIAMOND, diamondIV.tier);
-        assertEquals(Rank.Division.IV, diamondIV.division);
+        Rank diamondFour = new Rank("DIAMOND IV");
+        assertEquals(Rank.RankTier.DIAMOND, diamondFour.tier);
+        assertEquals(Rank.Division.IV, diamondFour.division);
 
         // top ranks without divisions
         Rank master = new Rank("MASTER");
@@ -109,38 +109,83 @@ public class RankTest {
 
     @Test
     public void equals() {
-        Rank goldI = new Rank("GOLD I");
-        Rank goldI2 = new Rank("gold i");
-        Rank goldII = new Rank("GOLD II");
+        Rank goldOne = new Rank("GOLD I");
+        Rank goldOneLower = new Rank("gold i");
+        Rank goldTwo = new Rank("GOLD II");
         Rank master = new Rank("MASTER");
-        Rank master2 = new Rank("master");
+        Rank masterLower = new Rank("master");
 
         // same rank
-        assertEquals(goldI, goldI2);
-        assertEquals(master, master2);
+        assertEquals(goldOne, goldOneLower);
+        assertEquals(master, masterLower);
 
         // different ranks
-        assertFalse(goldI.equals(goldII));
-        assertFalse(goldI.equals(master));
-        assertFalse(master.equals(goldI));
+        assertFalse(goldOne.equals(goldTwo));
+        assertFalse(goldOne.equals(master));
+        assertFalse(master.equals(goldOne));
 
         // null
-        assertFalse(goldI.equals(null));
+        assertFalse(goldOne.equals(null));
 
         // different type
-        assertFalse(goldI.equals(5));
+        assertFalse(goldOne.equals(5));
     }
 
     @Test
     public void hashCode_success() {
-        Rank goldI = new Rank("GOLD I");
-        Rank goldI2 = new Rank("gold i");
+        Rank goldOne = new Rank("GOLD I");
+        Rank goldOneLower = new Rank("gold i");
         Rank master = new Rank("MASTER");
 
         // same rank should have same hashcode
-        assertEquals(goldI.hashCode(), goldI2.hashCode());
+        assertEquals(goldOne.hashCode(), goldOneLower.hashCode());
 
         // different ranks should (likely) have different hashcode
-        assertFalse(goldI.hashCode() == master.hashCode());
+        assertFalse(goldOne.hashCode() == master.hashCode());
+    }
+
+    @Test
+    public void rankTier_getTierValue() {
+        assertEquals(0, Rank.RankTier.IRON.getTierValue());
+        assertEquals(1, Rank.RankTier.BRONZE.getTierValue());
+        assertEquals(2, Rank.RankTier.SILVER.getTierValue());
+        assertEquals(3, Rank.RankTier.GOLD.getTierValue());
+        assertEquals(4, Rank.RankTier.PLATINUM.getTierValue());
+        assertEquals(5, Rank.RankTier.DIAMOND.getTierValue());
+        assertEquals(6, Rank.RankTier.MASTER.getTierValue());
+        assertEquals(7, Rank.RankTier.GRANDMASTER.getTierValue());
+        assertEquals(8, Rank.RankTier.CHALLENGER.getTierValue());
+    }
+
+    @Test
+    public void division_getDivisionValue() {
+        assertEquals(0, Rank.Division.I.getDivisionValue());
+        assertEquals(1, Rank.Division.II.getDivisionValue());
+        assertEquals(2, Rank.Division.III.getDivisionValue());
+        assertEquals(3, Rank.Division.IV.getDivisionValue());
+    }
+
+    @Test
+    public void equals_withDifferentDivisions() {
+        Rank goldOne = new Rank("GOLD I");
+        Rank goldTwo = new Rank("GOLD II");
+        Rank goldThree = new Rank("GOLD III");
+        Rank goldFour = new Rank("GOLD IV");
+
+        // Different divisions should not be equal
+        assertFalse(goldOne.equals(goldTwo));
+        assertFalse(goldTwo.equals(goldThree));
+        assertFalse(goldThree.equals(goldFour));
+        assertFalse(goldOne.equals(goldFour));
+    }
+
+    @Test
+    public void equals_topRanksWithAndWithoutDivisions() {
+        Rank master = new Rank("MASTER");
+        Rank goldOne = new Rank("GOLD I");
+
+        // Top rank vs lower rank with division
+        assertFalse(master.equals(goldOne));
+        assertFalse(goldOne.equals(master));
     }
 }
