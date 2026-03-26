@@ -70,7 +70,7 @@ public class DraftCommand extends Command {
         // Resolve IGNs
         for (String ign : igns) {
             boolean found = false;
-            for (Person person : lastShownList) {
+            for (Person person : addressBookList) {
                 if (person.getIgn().value.equals(ign)) {
                     selectedPlayers.add(person);
                     found = true;
