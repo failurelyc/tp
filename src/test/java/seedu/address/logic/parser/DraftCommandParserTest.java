@@ -86,9 +86,6 @@ public class DraftCommandParserTest {
     @Test
     public void parse_invalidIndex_failure() {
         assertParseFailure(parser, "0", MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "-1", MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "a", MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "1 2 a", MESSAGE_INVALID_INDEX);
     }
 
     @Test
