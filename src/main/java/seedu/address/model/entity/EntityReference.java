@@ -30,7 +30,6 @@ public class EntityReference {
         this.entities = entities.stream()
                 .map(x -> x.getEntity())
                 .collect(Collectors.toList());
-        
         this.entityIconMap = new HashMap<>();
         entities.stream()
                 .forEach(x -> entityIconMap.put(x.getEntity(), x.getPath()));
