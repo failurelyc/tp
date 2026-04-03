@@ -12,22 +12,16 @@ public class Entity {
 
     // Identity fields
     private final String name;
-    private final String iconPath;
 
     /**
      * Every field must be present and not null.
      */
-    public Entity(String name, String iconPath) {
+    public Entity(String name) {
         this.name = name;
-        this.iconPath = iconPath;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getIconPath() {
-        return iconPath;
     }
 
     /**
@@ -59,25 +53,23 @@ public class Entity {
         }
 
         Entity otherEntity = (Entity) other;
-        return name.equals(otherEntity.name)
-                && iconPath.equals(otherEntity.iconPath);
+        return name.equals(otherEntity.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, iconPath);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("iconPath", iconPath)
                 .toString();
     }
 
     public static Entity createDefault() {
-        return new Entity("Default Entity", "path/to/default/icon.png");
+        return new Entity("Default Entity");
     }
 
 }

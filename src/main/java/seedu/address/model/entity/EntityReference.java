@@ -1,8 +1,11 @@
 package seedu.address.model.entity;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -14,15 +17,21 @@ import java.util.Optional;
 public class EntityReference {
 
     private static List<Entity> loadedEntities;
+    private static Map<Entity, Path> loadedEntityIconMap; // Map to store entity icons, if needed in the future
     private final List<Entity> entities;
+    private final Map<Entity, Path> entityIconMap;
 
     /**
      * Constructs an EntityReference with the given list of entities.
      * @param entities List of Entity objects to store
      */
-    public EntityReference(List<Entity> entities) {
+    public EntityReference(List<Entity> entities, List<Path> paths) {
         EntityReference.loadedEntities = new ArrayList<>(entities);
         this.entities = new ArrayList<>(entities);
+        this.entityIconMap = new HashMap<>();
+        for (int i = 0; i < entities.size(); i++) {
+            entityIconMap.put(entities.get(i), paths.get(i));
+        }
     }
 
     /**
@@ -30,6 +39,10 @@ public class EntityReference {
      */
     public List<Entity> getEntities() {
         return Collections.unmodifiableList(entities);
+    }
+
+    public List<Path> getPaths() {
+        return Collections.unmodifiableList(new ArrayList<>(entityIconMap.values()));
     }
 
     /**

@@ -9,6 +9,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMatchRecord;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.entity.EntityReference;
 
 /**
  * API of the Storage component
@@ -40,6 +41,9 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, MatchReco
     Path getEntityFilePath();
 
     @Override
-    Optional<seedu.address.model.entity.EntityReference> readEntityReference() throws DataLoadingException;
+    Optional<EntityReference> readEntityReference() throws DataLoadingException;
+
+    @Override
+    void saveEntityReference(EntityReference entityReference, Path filePath) throws IOException;
 
 }

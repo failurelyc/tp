@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,14 +20,19 @@ import seedu.address.model.entity.EntityReference;
 class JsonSerializableEntityReference {
 
     private final List<JsonAdaptedEntity> entities = new ArrayList<>();
+    private final List<JsonAdaptedPath> paths = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableEntityReference} with the given entities.
      */
     @JsonCreator
-    public JsonSerializableEntityReference(@JsonProperty("entities") List<JsonAdaptedEntity> entities) {
+    public JsonSerializableEntityReference(@JsonProperty("entities") List<JsonAdaptedEntity> entities,
+                                           @JsonProperty("paths") List<JsonAdaptedPath> paths) {
         if (entities != null) {
             this.entities.addAll(entities);
+        }
+        if (paths != null) {
+            this.paths.addAll(paths);
         }
     }
 
@@ -36,6 +42,9 @@ class JsonSerializableEntityReference {
     public JsonSerializableEntityReference(EntityReference source) {
         entities.addAll(source.getEntities().stream()
                 .map(JsonAdaptedEntity::new)
+                .collect(Collectors.toList()));
+        paths.addAll(source.getPaths().stream()
+                .map(JsonAdaptedPath::new)
                 .collect(Collectors.toList()));
     }
 
@@ -49,7 +58,11 @@ class JsonSerializableEntityReference {
         for (JsonAdaptedEntity jsonAdaptedEntity : entities) {
             entityList.add(jsonAdaptedEntity.toModelType());
         }
-        return new EntityReference(entityList);
+        List<Path> pathList = new ArrayList<>();
+        for (JsonAdaptedEntity jsonAdaptedEntity : entities) {
+            entityList.add(jsonAdaptedEntity.toModelType());
+        }
+        return new EntityReference(entityList, pathList);
     }
 
 }

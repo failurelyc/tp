@@ -139,7 +139,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidKills_throwsIllegalValueException() {
         JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics(INVALID_KILLS, "0", "0");
-        JsonAdaptedEntityStatisticMap.EntityData entityData = new JsonAdaptedEntityStatisticMap.EntityData(invalidStats, "");
+        JsonAdaptedEntityStatisticMap.EntityData entityData = new JsonAdaptedEntityStatisticMap.EntityData(invalidStats);
         java.util.Map<String, JsonAdaptedEntityStatisticMap.EntityData> statsMap = new java.util.HashMap<>();
         statsMap.put("default", entityData);
         JsonAdaptedEntityStatisticMap adaptedMap = new JsonAdaptedEntityStatisticMap(statsMap);
@@ -152,7 +152,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidDeaths_throwsIllegalValueException() {
         JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics("0", INVALID_DEATHS, "0");
-        JsonAdaptedEntityStatisticMap.EntityData entityData = new JsonAdaptedEntityStatisticMap.EntityData(invalidStats, "");
+        JsonAdaptedEntityStatisticMap.EntityData entityData = new JsonAdaptedEntityStatisticMap.EntityData(invalidStats);
         java.util.Map<String, JsonAdaptedEntityStatisticMap.EntityData> statsMap = new java.util.HashMap<>();
         statsMap.put("default", entityData);
         JsonAdaptedEntityStatisticMap adaptedMap = new JsonAdaptedEntityStatisticMap(statsMap);

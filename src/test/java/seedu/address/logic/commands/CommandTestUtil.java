@@ -150,11 +150,11 @@ public class CommandTestUtil {
                 .withDeaths(new Deaths(VALID_DEATHS_SET_2))
                 .withAssists(new Assists(VALID_ASSISTS_SET_2))
                 .build();
-        VALID_ENTITY_1 = new Entity(VALID_ENTITY_NAME_1, "images/default1");
-        VALID_ENTITY_2 = new Entity(VALID_ENTITY_NAME_2, "images/default2");
+        VALID_ENTITY_1 = new Entity(VALID_ENTITY_NAME_1);
+        VALID_ENTITY_2 = new Entity(VALID_ENTITY_NAME_2);
         VALID_ENTITY_REFERENCE = new EntityReference(List.of(
             VALID_ENTITY_1, VALID_ENTITY_2
-        ));
+        ), List.of());
         VALID_ENTITY_STATISTIC_MAP = new EntityStatisticMap.Builder()
             .withEntity(VALID_ENTITY_1, VALID_STATS_SET_1)
             .build();

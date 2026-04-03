@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityReference;
 import seedu.address.model.match.Result;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -232,6 +234,19 @@ public class ParserUtil {
             throw new ParseException(Result.MESSAGE_CONSTRAINTS);
         }
         return new Result(trimmedResult);
+    }
+
+    /**
+     * Parses a {@code String entity} into a {@code Entity}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code entity} is invalid.
+     */
+    public static Entity parseEntity(String entity) throws ParseException {
+        requireNonNull(entity);
+        String trimmedEntity = entity.trim().toUpperCase();
+        return EntityReference.findByName(trimmedEntity)
+            .orElseThrow(() -> new ParseException(Result.MESSAGE_CONSTRAINTS));
     }
 
 }

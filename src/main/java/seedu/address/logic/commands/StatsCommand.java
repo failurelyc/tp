@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 
   import java.util.List;
@@ -31,7 +32,7 @@ public class StatsCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "ENTITY"
+            + PREFIX_ENTITY + "ENTITY "
             + "[" + PREFIX_KILLS + "KILLS] "
             + "[" + PREFIX_DEATHS + "DEATHS] "
             + "[" + PREFIX_ASSISTS + "ASSISTS]\n"

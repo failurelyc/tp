@@ -128,4 +128,9 @@ public class StorageManager implements Storage {
         return entityStorage.readEntityReference(filePath);
     }
 
+    @Override
+    public void saveEntityReference(EntityReference entityReference, Path filePath) throws IOException {
+        entityStorage.saveEntityReference(entityReference, filePath);
+    }
+
 }

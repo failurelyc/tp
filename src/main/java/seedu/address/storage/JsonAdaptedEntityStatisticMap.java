@@ -23,21 +23,14 @@ class JsonAdaptedEntityStatisticMap {
      */
     public static class EntityData {
         private final JsonAdaptedStatistics statistics;
-        private final String iconPath;
 
         @JsonCreator
-        public EntityData(@JsonProperty("statistics") JsonAdaptedStatistics statistics,
-                        @JsonProperty("iconPath") String iconPath) {
+        public EntityData(@JsonProperty("statistics") JsonAdaptedStatistics statistics) {
             this.statistics = statistics;
-            this.iconPath = iconPath;
         }
 
         public JsonAdaptedStatistics getStatistics() {
             return statistics;
-        }
-
-        public String getIconPath() {
-            return iconPath;
         }
     }
 
@@ -59,8 +52,7 @@ class JsonAdaptedEntityStatisticMap {
         Map<Entity, Statistics> map = source.getMap();
         for (Map.Entry<Entity, Statistics> entry : map.entrySet()) {
             EntityData entityData = new EntityData(
-                new JsonAdaptedStatistics(entry.getValue()),
-                entry.getKey().getIconPath()
+                new JsonAdaptedStatistics(entry.getValue())
             );
             entityStatistics.put(entry.getKey().getName(), entityData);
         }
@@ -76,12 +68,7 @@ class JsonAdaptedEntityStatisticMap {
         EntityStatisticMap entityStatisticMap = new EntityStatisticMap();
         for (Map.Entry<String, EntityData> entry : entityStatistics.entrySet()) {
             String name = entry.getKey();
-            String iconPath = entry.getValue().getIconPath();
-            // Use name as iconPath if iconPath is null or empty to match PersonBuilder behavior
-            if (iconPath == null || iconPath.isEmpty()) {
-                iconPath = name;
-            }
-            Entity entity = new Entity(name, iconPath);
+            Entity entity = new Entity(name);
             Statistics statistics = entry.getValue().getStatistics().toModelType();
             entityStatisticMap.addStatistics(entity, statistics);
         }
