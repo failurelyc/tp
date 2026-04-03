@@ -67,17 +67,23 @@ public class SampleDataUtil {
 
     public static Match[] getSampleMatches() {
         PlayerInMatch player1 = new PlayerInMatch(
-                new InGameName("AlexY42"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
+                new InGameName("AlexY42"), Statistics.createRandom(10, 10, 20),
+                new Entity("Ahri"));
         PlayerInMatch player2 = new PlayerInMatch(
-                new InGameName("Bern_Storm"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
+                new InGameName("Bern_Storm"), Statistics.createRandom(10, 10, 20),
+                new Entity("Lee Sin"));
         PlayerInMatch player3 = new PlayerInMatch(
-                new InGameName("Charlie99"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
+                new InGameName("Charlie99"), Statistics.createRandom(10, 10, 20),
+                new Entity("Jinx"));
         PlayerInMatch player4 = new PlayerInMatch(
-                new InGameName("DavidLi91"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
+                new InGameName("DavidLi91"), Statistics.createRandom(10, 10, 20),
+                new Entity("Yasuo"));
         PlayerInMatch player5 = new PlayerInMatch(
-                new InGameName("IrfanZ"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
+                new InGameName("IrfanZ"), Statistics.createRandom(10, 10, 20),
+                new Entity("Zed"));
         PlayerInMatch player6 = new PlayerInMatch(
-                new InGameName("Roy_Vortex"), Statistics.createRandom(10, 10, 20), Entity.createDefault());
+                new InGameName("Roy_Vortex"), Statistics.createRandom(10, 10, 20),
+                new Entity("Annie"));
 
         PlayersInMatch players1 = new PlayersInMatch(List.of(player1, player2));
         PlayersInMatch players2 = new PlayersInMatch(List.of(player3, player4, player5));

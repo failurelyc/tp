@@ -69,9 +69,4 @@ public class Entity {
                 .add("name", name)
                 .toString();
     }
-
-    public static Entity createDefault() {
-        return new Entity("Default Entity");
-    }
-
 }

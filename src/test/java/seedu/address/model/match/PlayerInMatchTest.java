@@ -2,10 +2,10 @@ package seedu.address.model.match;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_1;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.entity.Entity;
 import seedu.address.testutil.TypicalMatches;
 
 public class PlayerInMatchTest {
@@ -17,11 +17,11 @@ public class PlayerInMatchTest {
         PlayerInMatch player1 = TypicalMatches.FOUR_PLAYERS.get(0);
         PlayerInMatch player2 = TypicalMatches.FOUR_PLAYERS.get(1);
         PlayerInMatch same = new PlayerInMatch(
-            player1.getInGameName(), player1.getStatistics(), Entity.createDefault());
+            player1.getInGameName(), player1.getStatistics(), VALID_ENTITY_1);
         PlayerInMatch differentStatistics = new PlayerInMatch(
-            player1.getInGameName(), player2.getStatistics(), Entity.createDefault());
+            player1.getInGameName(), player2.getStatistics(), VALID_ENTITY_1);
         PlayerInMatch differentName = new PlayerInMatch(
-            player2.getInGameName(), player1.getStatistics(), Entity.createDefault());
+            player2.getInGameName(), player1.getStatistics(), VALID_ENTITY_1);
         assertEquals(player1, same);
 
         // same object -> returns true
