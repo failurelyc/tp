@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 /**
@@ -25,13 +26,15 @@ public class EntityReference {
      * Constructs an EntityReference with the given list of entities.
      * @param entities List of Entity objects to store
      */
-    public EntityReference(List<Entity> entities, List<Path> paths) {
-        EntityReference.loadedEntities = new ArrayList<>(entities);
-        this.entities = new ArrayList<>(entities);
+    public EntityReference(List<EntityPathPair> entities) {
+        this.entities = entities.stream()
+                .map(x -> x.getEntity())
+                .collect(Collectors.toList());
+        
         this.entityIconMap = new HashMap<>();
-        for (int i = 0; i < entities.size(); i++) {
-            entityIconMap.put(entities.get(i), paths.get(i));
-        }
+        entities.stream()
+                .forEach(x -> entityIconMap.put(x.getEntity(), x.getPath()));
+        this.reload();
     }
 
     /**
@@ -43,6 +46,11 @@ public class EntityReference {
 
     public List<Path> getPaths() {
         return Collections.unmodifiableList(new ArrayList<>(entityIconMap.values()));
+    }
+
+    public List<EntityPathPair> getEntityPathPairs() {
+        return entities.stream().map(x -> new EntityPathPair(x, entityIconMap.get(x)))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -59,6 +67,7 @@ public class EntityReference {
 
     public void reload() {
         EntityReference.loadedEntities = new ArrayList<>(this.entities);
+        EntityReference.loadedEntityIconMap = new HashMap<>(this.entityIconMap);
     }
 
     /**
@@ -79,6 +88,10 @@ public class EntityReference {
      */
     public static boolean hasEntity(String name) {
         return findByName(name).isPresent();
+    }
+
+    public static Path getIconPath(Entity entity) {
+        return loadedEntityIconMap.get(entity);
     }
 
     @Override

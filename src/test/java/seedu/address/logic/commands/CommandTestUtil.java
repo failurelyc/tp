@@ -18,6 +18,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityPathPair;
 import seedu.address.model.entity.EntityReference;
 import seedu.address.model.entity.EntityStatisticMap;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -153,8 +155,9 @@ public class CommandTestUtil {
         VALID_ENTITY_1 = new Entity(VALID_ENTITY_NAME_1);
         VALID_ENTITY_2 = new Entity(VALID_ENTITY_NAME_2);
         VALID_ENTITY_REFERENCE = new EntityReference(List.of(
-            VALID_ENTITY_1, VALID_ENTITY_2
-        ), List.of());
+            new EntityPathPair(VALID_ENTITY_1, Path.of("images/default1.png")),
+            new EntityPathPair(VALID_ENTITY_2, Path.of("images/default2.png"))
+        ));
         VALID_ENTITY_STATISTIC_MAP = new EntityStatisticMap.Builder()
             .withEntity(VALID_ENTITY_1, VALID_STATS_SET_1)
             .build();

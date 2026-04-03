@@ -2,13 +2,11 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
@@ -25,7 +23,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMatchRecord;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.entity.Entity;
 import seedu.address.model.entity.EntityReference;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleEntityUtil;
@@ -99,9 +96,8 @@ public class MainApp extends Application {
             if (entityReferenceOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getEntityFilePath()
                         + " with sample entities.");
-                Pair<List<Entity>, List<Path>> pair = SampleEntityUtil.getSampleEntities();
                 initialEntityReference = new EntityReference(
-                    pair.getKey(), pair.getValue());
+                    SampleEntityUtil.getSampleEntities());
                 storage.saveEntityReference(initialEntityReference, storage.getEntityFilePath());
             } else {
                 initialEntityReference = entityReferenceOptional.get();
@@ -120,17 +116,13 @@ public class MainApp extends Application {
                     + " Will be starting with an empty AddressBook, Match Record, and Entity Reference.");
             initialData = new AddressBook();
             initialMatchRecord = new MatchRecord();
-            Pair<List<Entity>, List<Path>> pair = SampleEntityUtil.getSampleEntities();
-            initialEntityReference = new EntityReference(
-                    pair.getKey(), pair.getValue());
+            initialEntityReference = new EntityReference(SampleEntityUtil.getSampleEntities());
         } catch (IOException e) {
             logger.warning("Failed to save sample entity reference. Details: "
                     + StringUtil.getDetails(e));
             initialData = new AddressBook();
             initialMatchRecord = new MatchRecord();
-            Pair<List<Entity>, List<Path>> pair = SampleEntityUtil.getSampleEntities();
-            initialEntityReference = new EntityReference(
-                    pair.getKey(), pair.getValue());
+            initialEntityReference = new EntityReference(SampleEntityUtil.getSampleEntities());
         }
 
         ModelManager modelManager = new ModelManager(initialData, initialMatchRecord, userPrefs);
