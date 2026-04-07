@@ -38,7 +38,8 @@ public class StatsCommand extends Command {
             + "[" + PREFIX_DEATHS + "DEATHS] "
             + "[" + PREFIX_ASSISTS + "ASSISTS]\n";
 
-    public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 " + PREFIX_KILLS + "50 " + PREFIX_DEATHS + "10 "
+    public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_KILLS + "50 " + PREFIX_DEATHS + "10 "
             + PREFIX_ASSISTS + "20";
 
     public static final String MESSAGE_STATS_SUCCESS = "Updated Statistics for Person: %1$s";
