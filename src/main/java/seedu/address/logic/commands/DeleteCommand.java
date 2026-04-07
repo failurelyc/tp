@@ -19,18 +19,23 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE =
-        "Deletes the person identified by the index number used in the displayed person list.";
+        "Deletes the person identified by the index number or in-game name (IGN) used in the displayed person list.";
 
-    public static final String PARAMETERS = "Parameters: INDEX (must be a positive integer)\n";
+    public static final String PARAMETERS = "Parameters: INDEX (must be a positive integer) or i/IGN\n";
 
-    public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1";
+    public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1\n" + COMMAND_WORD + " i/PlayerName";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_IGN_NOT_FOUND = "No person with IGN '%1$s' found.";
 
-    private final Index targetIndex;
+    private final String targetIdentifier;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * Creates a DeleteCommand to delete the person with the specified identifier.
+     * The identifier can be either an index (as a string) or an IGN.
+     */
+    public DeleteCommand(String targetIdentifier) {
+        this.targetIdentifier = targetIdentifier;
     }
 
     @Override
@@ -38,11 +43,29 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> addressBookList = model.getAddressBook().getPersonList();
 
-        if (targetIndex.getZeroBased() >= addressBookList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Person personToDelete;
+
+        // Check if identifier is an index (numeric)
+        if (targetIdentifier.matches("\\d+")) {
+            int index = Integer.parseInt(targetIdentifier) - 1; // Convert to zero-based
+            if (index < 0 || index >= addressBookList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            personToDelete = addressBookList.get(index);
+        } else {
+            // It's an IGN
+            personToDelete = null;
+            for (Person person : addressBookList) {
+                if (person.getIgn().value.equals(targetIdentifier)) {
+                    personToDelete = person;
+                    break;
+                }
+            }
+            if (personToDelete == null) {
+                throw new CommandException(String.format(MESSAGE_IGN_NOT_FOUND, targetIdentifier));
+            }
         }
 
-        Person personToDelete = addressBookList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -59,13 +82,13 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return targetIdentifier.equals(otherDeleteCommand.targetIdentifier);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIdentifier", targetIdentifier)
                 .toString();
     }
 }

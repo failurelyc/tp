@@ -23,15 +23,15 @@ public class CompareCommandParser implements Parser<CompareCommand> {
      */
     public CompareCommand parse(String args) throws ParseException {
         try {
-            List<String> indexStrings = Arrays.asList(args.trim().split("\\s+"));
-            if (indexStrings.size() != 2) {
+            List<String> identifierStrings = Arrays.asList(args.trim().split("\\s+"));
+            if (identifierStrings.size() != 2) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompareCommand.PARAMETERS));
             }
 
-            Index index1 = ParserUtil.parseIndex(indexStrings.get(0));
-            Index index2 = ParserUtil.parseIndex(indexStrings.get(1));
-            return new CompareCommand(index1, index2);
+            String identifier1 = ParserUtil.parseIdentifier(identifierStrings.get(0));
+            String identifier2 = ParserUtil.parseIdentifier(identifierStrings.get(1));
+            return new CompareCommand(identifier1, identifier2);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompareCommand.PARAMETERS), pe);
