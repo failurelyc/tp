@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -12,9 +14,9 @@
    </padding>
 
    <!-- TOP Player Panel -->
-   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="10">
+   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="5">
       <padding>
-         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </padding>
 
       <Label fx:id="topName" styleClass="player-comparison-name">
@@ -23,31 +25,50 @@
          </font>
       </Label>
 
-      <VBox spacing="8">
+      <VBox spacing="4">
          <Label text="Role:" styleClass="field-label" />
          <Label fx:id="topRole" styleClass="field-value" />
 
          <Label text="Rank:" styleClass="field-label" />
          <Label fx:id="topRank" styleClass="field-value" />
 
-         <Label text="Kills:" styleClass="field-label" />
-         <Label fx:id="topKills" styleClass="field-value" />
+         <!-- Combined KDA Line -->
+         <VBox spacing="3">
+            <Label text="Overall Stats:" styleClass="field-label" />
+            <HBox spacing="5" alignment="CENTER_LEFT">
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="topKills" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="topDeaths" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="topAssists" styleClass="field-value" />
+               </HBox>
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label text="(" styleClass="field-value" />
+                  <Label fx:id="topKdRatio" styleClass="field-value" />
+                  <Label text=")" styleClass="field-value" />
+               </HBox>
+            </HBox>
+         </VBox>
 
-         <Label text="Deaths:" styleClass="field-label" />
-         <Label fx:id="topDeaths" styleClass="field-value" />
-
-         <Label text="Assists:" styleClass="field-label" />
-         <Label fx:id="topAssists" styleClass="field-value" />
-
-         <Label text="KDA Ratio:" styleClass="field-label" />
-         <Label fx:id="topKdRatio" styleClass="field-value" />
+         <!-- Entity Buttons -->
+         <VBox spacing="3" VBox.vgrow="ALWAYS">
+            <Label text="Champions:" styleClass="field-label" />
+            <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="entity-scroll-pane">
+               <FlowPane fx:id="topEntityFlowPane" hgap="5" vgap="5" styleClass="entity-flow-pane" />
+            </ScrollPane>
+         </VBox>
       </VBox>
    </VBox>
 
    <!-- JUNGLE Player Panel -->
-   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="10">
+   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="5">
       <padding>
-         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </padding>
 
       <Label fx:id="jungleName" styleClass="player-comparison-name">
@@ -56,31 +77,50 @@
          </font>
       </Label>
 
-      <VBox spacing="8">
+      <VBox spacing="4">
          <Label text="Role:" styleClass="field-label" />
          <Label fx:id="jungleRole" styleClass="field-value" />
 
          <Label text="Rank:" styleClass="field-label" />
          <Label fx:id="jungleRank" styleClass="field-value" />
 
-         <Label text="Kills:" styleClass="field-label" />
-         <Label fx:id="jungleKills" styleClass="field-value" />
+         <!-- Combined KDA Line -->
+         <VBox spacing="3">
+            <Label text="Overall Stats:" styleClass="field-label" />
+            <HBox spacing="5" alignment="CENTER_LEFT">
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="jungleKills" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="jungleDeaths" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="jungleAssists" styleClass="field-value" />
+               </HBox>
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label text="(" styleClass="field-value" />
+                  <Label fx:id="jungleKdRatio" styleClass="field-value" />
+                  <Label text=")" styleClass="field-value" />
+               </HBox>
+            </HBox>
+         </VBox>
 
-         <Label text="Deaths:" styleClass="field-label" />
-         <Label fx:id="jungleDeaths" styleClass="field-value" />
-
-         <Label text="Assists:" styleClass="field-label" />
-         <Label fx:id="jungleAssists" styleClass="field-value" />
-
-         <Label text="KDA Ratio:" styleClass="field-label" />
-         <Label fx:id="jungleKdRatio" styleClass="field-value" />
+         <!-- Entity Buttons -->
+         <VBox spacing="3" VBox.vgrow="ALWAYS">
+            <Label text="Champions:" styleClass="field-label" />
+            <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="entity-scroll-pane">
+               <FlowPane fx:id="jungleEntityFlowPane" hgap="5" vgap="5" styleClass="entity-flow-pane" />
+            </ScrollPane>
+         </VBox>
       </VBox>
    </VBox>
 
    <!-- MID Player Panel -->
-   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="10">
+   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="5">
       <padding>
-         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </padding>
 
       <Label fx:id="midName" styleClass="player-comparison-name">
@@ -89,31 +129,50 @@
          </font>
       </Label>
 
-      <VBox spacing="8">
+      <VBox spacing="4">
          <Label text="Role:" styleClass="field-label" />
          <Label fx:id="midRole" styleClass="field-value" />
 
          <Label text="Rank:" styleClass="field-label" />
          <Label fx:id="midRank" styleClass="field-value" />
 
-         <Label text="Kills:" styleClass="field-label" />
-         <Label fx:id="midKills" styleClass="field-value" />
+         <!-- Combined KDA Line -->
+         <VBox spacing="3">
+            <Label text="Overall Stats:" styleClass="field-label" />
+            <HBox spacing="5" alignment="CENTER_LEFT">
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="midKills" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="midDeaths" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="midAssists" styleClass="field-value" />
+               </HBox>
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label text="(" styleClass="field-value" />
+                  <Label fx:id="midKdRatio" styleClass="field-value" />
+                  <Label text=")" styleClass="field-value" />
+               </HBox>
+            </HBox>
+         </VBox>
 
-         <Label text="Deaths:" styleClass="field-label" />
-         <Label fx:id="midDeaths" styleClass="field-value" />
-
-         <Label text="Assists:" styleClass="field-label" />
-         <Label fx:id="midAssists" styleClass="field-value" />
-
-         <Label text="KDA Ratio:" styleClass="field-label" />
-         <Label fx:id="midKdRatio" styleClass="field-value" />
+         <!-- Entity Buttons -->
+         <VBox spacing="3" VBox.vgrow="ALWAYS">
+            <Label text="Champions:" styleClass="field-label" />
+            <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="entity-scroll-pane">
+               <FlowPane fx:id="midEntityFlowPane" hgap="5" vgap="5" styleClass="entity-flow-pane" />
+            </ScrollPane>
+         </VBox>
       </VBox>
    </VBox>
 
    <!-- BOT Player Panel -->
-   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="10">
+   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="5">
       <padding>
-         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </padding>
 
       <Label fx:id="botName" styleClass="player-comparison-name">
@@ -122,31 +181,50 @@
          </font>
       </Label>
 
-      <VBox spacing="8">
+      <VBox spacing="4">
          <Label text="Role:" styleClass="field-label" />
          <Label fx:id="botRole" styleClass="field-value" />
 
          <Label text="Rank:" styleClass="field-label" />
          <Label fx:id="botRank" styleClass="field-value" />
 
-         <Label text="Kills:" styleClass="field-label" />
-         <Label fx:id="botKills" styleClass="field-value" />
+         <!-- Combined KDA Line -->
+         <VBox spacing="3">
+            <Label text="Overall Stats:" styleClass="field-label" />
+            <HBox spacing="5" alignment="CENTER_LEFT">
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="botKills" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="botDeaths" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="botAssists" styleClass="field-value" />
+               </HBox>
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label text="(" styleClass="field-value" />
+                  <Label fx:id="botKdRatio" styleClass="field-value" />
+                  <Label text=")" styleClass="field-value" />
+               </HBox>
+            </HBox>
+         </VBox>
 
-         <Label text="Deaths:" styleClass="field-label" />
-         <Label fx:id="botDeaths" styleClass="field-value" />
-
-         <Label text="Assists:" styleClass="field-label" />
-         <Label fx:id="botAssists" styleClass="field-value" />
-
-         <Label text="KDA Ratio:" styleClass="field-label" />
-         <Label fx:id="botKdRatio" styleClass="field-value" />
+         <!-- Entity Buttons -->
+         <VBox spacing="3" VBox.vgrow="ALWAYS">
+            <Label text="Champions:" styleClass="field-label" />
+            <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="entity-scroll-pane">
+               <FlowPane fx:id="botEntityFlowPane" hgap="5" vgap="5" styleClass="entity-flow-pane" />
+            </ScrollPane>
+         </VBox>
       </VBox>
    </VBox>
 
    <!-- SUPPORT Player Panel -->
-   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="10">
+   <VBox HBox.hgrow="ALWAYS" prefWidth="180" styleClass="panel-with-border" spacing="5">
       <padding>
-         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </padding>
 
       <Label fx:id="supportName" styleClass="player-comparison-name">
@@ -155,24 +233,43 @@
          </font>
       </Label>
 
-      <VBox spacing="8">
+      <VBox spacing="4">
          <Label text="Role:" styleClass="field-label" />
          <Label fx:id="supportRole" styleClass="field-value" />
 
          <Label text="Rank:" styleClass="field-label" />
          <Label fx:id="supportRank" styleClass="field-value" />
 
-         <Label text="Kills:" styleClass="field-label" />
-         <Label fx:id="supportKills" styleClass="field-value" />
+         <!-- Combined KDA Line -->
+         <VBox spacing="3">
+            <Label text="Overall Stats:" styleClass="field-label" />
+            <HBox spacing="5" alignment="CENTER_LEFT">
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="supportKills" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="supportDeaths" styleClass="field-value" />
+               </HBox>
+               <Label text="/" styleClass="field-value" />
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label fx:id="supportAssists" styleClass="field-value" />
+               </HBox>
+               <HBox spacing="2" alignment="CENTER_LEFT">
+                  <Label text="(" styleClass="field-value" />
+                  <Label fx:id="supportKdRatio" styleClass="field-value" />
+                  <Label text=")" styleClass="field-value" />
+               </HBox>
+            </HBox>
+         </VBox>
 
-         <Label text="Deaths:" styleClass="field-label" />
-         <Label fx:id="supportDeaths" styleClass="field-value" />
-
-         <Label text="Assists:" styleClass="field-label" />
-         <Label fx:id="supportAssists" styleClass="field-value" />
-
-         <Label text="KDA Ratio:" styleClass="field-label" />
-         <Label fx:id="supportKdRatio" styleClass="field-value" />
+         <!-- Entity Buttons -->
+         <VBox spacing="3" VBox.vgrow="ALWAYS">
+            <Label text="Champions:" styleClass="field-label" />
+            <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="entity-scroll-pane">
+               <FlowPane fx:id="supportEntityFlowPane" hgap="5" vgap="5" styleClass="entity-flow-pane" />
+            </ScrollPane>
+         </VBox>
       </VBox>
    </VBox>
 
