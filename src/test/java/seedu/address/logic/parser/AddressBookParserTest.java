@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_NAME_1;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -94,9 +97,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_stats() throws Exception {
         final String kills = "10";
-        StatsCommand.EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder().withKills(kills).build();
+        StatsCommand.EditStatsDescriptor descriptor = new EditStatsDescriptorBuilder()
+            .withEntity(VALID_ENTITY_1).withKills(kills).build();
         StatsCommand command = (StatsCommand) parser.parseCommand(StatsCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_KILLS + kills);
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_ENTITY + VALID_ENTITY_NAME_1 + " "
+                + PREFIX_KILLS + kills);
         assertEquals(new StatsCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

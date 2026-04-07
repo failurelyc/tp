@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMatchRecord;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.entity.EntityReference;
 import seedu.address.model.match.Match;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -192,6 +193,26 @@ public class AddCommandTest {
 
         @Override
         public void addMatch(Match match) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public EntityReference getEntityReference() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEntityReference(EntityReference entityReference) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getEntityFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEntityFilePath(Path entityFilePath) {
             throw new AssertionError("This method should not be called.");
         }
     }

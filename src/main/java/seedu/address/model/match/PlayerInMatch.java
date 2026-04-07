@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.entity.Entity;
 import seedu.address.model.person.InGameName;
 import seedu.address.model.person.statistics.Statistics;
 
@@ -15,21 +16,28 @@ public class PlayerInMatch {
 
     private final Statistics statistics;
     private final InGameName ign;
+    private final Entity entity;
 
     /**
      * Constructs a {@code PlayerInMatch}
      *
      * @param ign The ign of the player.
      * @param statistics The statistics of the player in this match.
+     * @param entity The entity used by the player in this match.
      */
-    public PlayerInMatch(InGameName ign, Statistics statistics) {
-        requireAllNonNull(ign, statistics);
+    public PlayerInMatch(InGameName ign, Statistics statistics, Entity entity) {
+        requireAllNonNull(ign, statistics, entity);
         this.ign = ign;
         this.statistics = statistics;
+        this.entity = entity;
     }
 
     public InGameName getInGameName() {
         return ign;
+    }
+
+    public Entity getEntity() {
+        return entity;
     }
 
     public Statistics getStatistics() {

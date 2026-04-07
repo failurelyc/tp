@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -17,6 +18,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +27,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityPathPair;
+import seedu.address.model.entity.EntityReference;
+import seedu.address.model.entity.EntityStatisticMap;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.statistics.Assists;
@@ -67,6 +73,12 @@ public class CommandTestUtil {
     public static final String VALID_RESULT_LOSE = "LOSE";
     public static final String VALID_RESULT_DRAW = "DRAW";
     public static final String VALID_DATE = "2025-12-01";
+    public static final Entity VALID_ENTITY_1;
+    public static final String VALID_ENTITY_NAME_1 = "default1";
+    public static final Entity VALID_ENTITY_2;
+    public static final String VALID_ENTITY_NAME_2 = "default2";
+    public static final EntityReference VALID_ENTITY_REFERENCE;
+    public static final EntityStatisticMap VALID_ENTITY_STATISTIC_MAP;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -94,6 +106,8 @@ public class CommandTestUtil {
     public static final String RESULT_DESC_LOSE = " " + PREFIX_RESULT + VALID_RESULT_LOSE;
     public static final String RESULT_DESC_DRAW = " " + PREFIX_RESULT + VALID_RESULT_DRAW;
     public static final String DATE_DESC = " " + PREFIX_DATE + VALID_DATE;
+    public static final String ENTITY_DESC_1 = " " + PREFIX_ENTITY + "default1";
+    public static final String ENTITY_DESC_2 = " " + PREFIX_ENTITY + "default2";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -108,6 +122,7 @@ public class CommandTestUtil {
     public static final String INVALID_ASSISTS_DESC = " " + PREFIX_ASSISTS + "-1"; // Negative not allowed
     public static final String INVALID_RESULT_DESC = " " + PREFIX_RESULT + "INVALID";
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "INVALID";
+    public static final String INVALID_ENTITY_DESC = " " + PREFIX_ENTITY + "INVALID";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -137,16 +152,28 @@ public class CommandTestUtil {
                 .withDeaths(new Deaths(VALID_DEATHS_SET_2))
                 .withAssists(new Assists(VALID_ASSISTS_SET_2))
                 .build();
+        VALID_ENTITY_1 = new Entity(VALID_ENTITY_NAME_1);
+        VALID_ENTITY_2 = new Entity(VALID_ENTITY_NAME_2);
+        VALID_ENTITY_REFERENCE = new EntityReference(List.of(
+            new EntityPathPair(VALID_ENTITY_1, Path.of("images/default1.png")),
+            new EntityPathPair(VALID_ENTITY_2, Path.of("images/default2.png"))
+        ));
+        VALID_ENTITY_STATISTIC_MAP = new EntityStatisticMap.Builder()
+            .withEntity(VALID_ENTITY_1, VALID_STATS_SET_1)
+            .build();
         STATS_DESC_SET_1 = new EditStatsDescriptorBuilder()
+                .withEntity(VALID_ENTITY_1)
                 .withKills(VALID_KILLS_SET_1)
                 .withDeaths(VALID_DEATHS_SET_1)
                 .withAssists(VALID_ASSISTS_SET_1)
                 .build();
         STATS_DESC_SET_2 = new EditStatsDescriptorBuilder()
+                .withEntity(VALID_ENTITY_2)
                 .withKills(VALID_KILLS_SET_2)
                 .withDeaths(VALID_DEATHS_SET_2)
                 .withAssists(VALID_ASSISTS_SET_2)
                 .build();
+
     }
 
     /**

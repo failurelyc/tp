@@ -10,6 +10,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.MatchRecord;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMatchRecord;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityStatisticMap;
 import seedu.address.model.match.Match;
 import seedu.address.model.match.PlayerInMatch;
 import seedu.address.model.match.PlayersInMatch;
@@ -34,48 +36,54 @@ public class SampleDataUtil {
                 new Role("TOP"),
                 new InGameName("AlexY42"), new Rank("GOLD I"),
                 getTagSet("friends"),
-            Statistics.createDefault()),
+                new EntityStatisticMap()),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Role("JUNGLE"),
                 new InGameName("Bern_Storm"), new Rank("PLATINUM II"),
                 getTagSet("colleagues", "friends"),
-            Statistics.createDefault()),
+                new EntityStatisticMap()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Role("MID"),
                 new InGameName("Charlie99"), new Rank("SILVER III"),
                 getTagSet("neighbours"),
-            Statistics.createDefault()),
+                new EntityStatisticMap()),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Role("BOT"),
                 new InGameName("DavidLi91"), new Rank("DIAMOND IV"),
                 getTagSet("family"),
-            Statistics.createDefault()),
+                new EntityStatisticMap()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Role("SUPPORT"),
                 new InGameName("IrfanZ"), new Rank("GOLD III"),
                 getTagSet("classmates"),
-            Statistics.createDefault()),
+                new EntityStatisticMap()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Role("TOP"),
                 new InGameName("Roy_Vortex"), new Rank("CHALLENGER"),
                 getTagSet("colleagues"),
-            Statistics.createDefault())
+                new EntityStatisticMap())
         };
     }
 
     public static Match[] getSampleMatches() {
         PlayerInMatch player1 = new PlayerInMatch(
-                new InGameName("AlexY42"), Statistics.createRandom(10, 10, 20));
+                new InGameName("AlexY42"), Statistics.createRandom(10, 10, 20),
+                new Entity("Ahri"));
         PlayerInMatch player2 = new PlayerInMatch(
-                new InGameName("Bern_Storm"), Statistics.createRandom(10, 10, 20));
+                new InGameName("Bern_Storm"), Statistics.createRandom(10, 10, 20),
+                new Entity("Lee Sin"));
         PlayerInMatch player3 = new PlayerInMatch(
-                new InGameName("Charlie99"), Statistics.createRandom(10, 10, 20));
+                new InGameName("Charlie99"), Statistics.createRandom(10, 10, 20),
+                new Entity("Jinx"));
         PlayerInMatch player4 = new PlayerInMatch(
-                new InGameName("DavidLi91"), Statistics.createRandom(10, 10, 20));
+                new InGameName("DavidLi91"), Statistics.createRandom(10, 10, 20),
+                new Entity("Yasuo"));
         PlayerInMatch player5 = new PlayerInMatch(
-                new InGameName("IrfanZ"), Statistics.createRandom(10, 10, 20));
+                new InGameName("IrfanZ"), Statistics.createRandom(10, 10, 20),
+                new Entity("Zed"));
         PlayerInMatch player6 = new PlayerInMatch(
-                new InGameName("Roy_Vortex"), Statistics.createRandom(10, 10, 20));
+                new InGameName("Roy_Vortex"), Statistics.createRandom(10, 10, 20),
+                new Entity("Annie"));
 
         PlayersInMatch players1 = new PlayersInMatch(List.of(player1, player2));
         PlayersInMatch players2 = new PlayersInMatch(List.of(player3, player4, player5));

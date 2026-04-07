@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENTITY_1;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,27 +33,31 @@ public class TypicalMatches {
             FOUR_PERSONS.stream()
                     .map(person ->
                             new PlayerInMatch(person.getIgn(),
-                                    Statistics.createRandom(10, 10, 20)))
+                                    Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
                     .toList());
     public static final PlayersInMatch THREE_PLAYERS = new PlayersInMatch(
             THREE_PERSONS.stream()
                     .map(person ->
                             new PlayerInMatch(person.getIgn(),
-                                    Statistics.createRandom(10, 10, 20)))
+                                    Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
                     .toList()
     );
     public static final PlayersInMatch TWO_PLAYERS = new PlayersInMatch(
             TWO_PERSONS.stream()
                     .map(person ->
                             new PlayerInMatch(person.getIgn(),
-                                    Statistics.createRandom(10, 10, 20)))
+                                    Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
                     .toList()
     );
     public static final PlayersInMatch ONE_PLAYER = new PlayersInMatch(
             ONE_PERSON.stream()
                     .map(person ->
                             new PlayerInMatch(person.getIgn(),
-                                    Statistics.createRandom(10, 10, 20)))
+                                    Statistics.createRandom(10, 10, 20),
+                            VALID_ENTITY_1))
                     .toList()
     );
 

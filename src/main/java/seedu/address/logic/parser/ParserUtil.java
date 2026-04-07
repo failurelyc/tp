@@ -12,6 +12,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entity.Entity;
+import seedu.address.model.entity.EntityReference;
 import seedu.address.model.match.PlayerInMatch;
 import seedu.address.model.match.PlayersInMatch;
 import seedu.address.model.match.Result;
@@ -246,17 +248,18 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code argIgn, argKills, argDeaths, argAssists} are invalid.
      */
-    public static PlayersInMatch parsePlayers(List<String> argIgn, List<String> argKills,
+    public static PlayersInMatch parsePlayers(List<String> argIgn, List<String> argEntities, List<String> argKills,
             List<String> argDeaths, List<String> argAssists) throws ParseException {
         int noPlayers = argIgn.size();
 
         if (noPlayers != argKills.size() || noPlayers != argDeaths.size()
-                || noPlayers != argAssists.size()) {
+                || noPlayers != argAssists.size() || noPlayers != argEntities.size()) {
             throw new ParseException(String.format(MESSAGE_FIELD_QUANTITY_MISMATCH));
         }
         List<PlayerInMatch> players = new ArrayList<>(noPlayers);
         for (int i = 0; i < noPlayers; i++) {
             InGameName ign = ParserUtil.parseIgn(argIgn.get(i));
+            Entity entity = ParserUtil.parseEntity(argEntities.get(i));
             Kills kills = ParserUtil.parseKills(argKills.get(i));
             Deaths deaths = ParserUtil.parseDeaths(argDeaths.get(i));
             Assists assists = ParserUtil.parseAssists(argAssists.get(i));
@@ -266,7 +269,7 @@ public class ParserUtil {
                     .withDeaths(deaths)
                     .withAssists(assists)
                     .build();
-            players.add(new PlayerInMatch(ign, statistics));
+            players.add(new PlayerInMatch(ign, statistics, entity));
         }
 
         if (!PlayersInMatch.isValidPlayerList(players)) {
@@ -275,6 +278,19 @@ public class ParserUtil {
 
         return new PlayersInMatch(players);
 
+    }
+
+    /**
+     * Parses a {@code String entity} into a {@code Entity}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code entity} is invalid.
+     */
+    public static Entity parseEntity(String entity) throws ParseException {
+        requireNonNull(entity);
+        String trimmedEntity = entity.trim().toUpperCase();
+        return EntityReference.findByName(trimmedEntity)
+            .orElseThrow(() -> new ParseException(String.format(Entity.NOT_FOUND, trimmedEntity)));
     }
 
 }

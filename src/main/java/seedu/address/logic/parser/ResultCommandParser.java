@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
@@ -34,9 +35,9 @@ public class ResultCommandParser implements Parser<ResultCommand> {
     @Override
     public ResultCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_RESULT, PREFIX_DATE, PREFIX_IGN, PREFIX_KILLS,
-                    PREFIX_DEATHS, PREFIX_ASSISTS);
-        if (!arePrefixesPresent(argMultimap, PREFIX_RESULT, PREFIX_IGN, PREFIX_KILLS,
+                ArgumentTokenizer.tokenize(args, PREFIX_RESULT, PREFIX_DATE, PREFIX_IGN, PREFIX_ENTITY,
+                    PREFIX_KILLS, PREFIX_DEATHS, PREFIX_ASSISTS);
+        if (!arePrefixesPresent(argMultimap, PREFIX_RESULT, PREFIX_IGN, PREFIX_ENTITY, PREFIX_KILLS,
                 PREFIX_DEATHS, PREFIX_ASSISTS) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ResultCommand.MESSAGE_USAGE));
         }
@@ -44,11 +45,12 @@ public class ResultCommandParser implements Parser<ResultCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_RESULT);
         Result result = ParserUtil.parseResult(argMultimap.getValue(PREFIX_RESULT).get());
         List<String> argIgn = argMultimap.getAllValues(PREFIX_IGN);
+        List<String> argEntities = argMultimap.getAllValues(PREFIX_ENTITY);
         List<String> argKills = argMultimap.getAllValues(PREFIX_KILLS);
         List<String> argDeaths = argMultimap.getAllValues(PREFIX_DEATHS);
         List<String> argAssists = argMultimap.getAllValues(PREFIX_ASSISTS);
 
-        PlayersInMatch players = ParserUtil.parsePlayers(argIgn, argKills, argDeaths, argAssists);
+        PlayersInMatch players = ParserUtil.parsePlayers(argIgn, argEntities, argKills, argDeaths, argAssists);
 
         Match match;
 

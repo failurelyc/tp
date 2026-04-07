@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSISTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEATHS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KILLS;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.StatsCommand;
 import seedu.address.logic.commands.StatsCommand.EditStatsDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.entity.Entity;
 
 /**
  * Parses input arguments and creates a new StatsCommand object
@@ -25,7 +27,8 @@ public class StatsCommandParser implements Parser<StatsCommand> {
      */
     public StatsCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_KILLS, PREFIX_DEATHS, PREFIX_ASSISTS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+            args, PREFIX_ENTITY, PREFIX_KILLS, PREFIX_DEATHS, PREFIX_ASSISTS);
 
         Index index;
         try {
@@ -34,9 +37,15 @@ public class StatsCommandParser implements Parser<StatsCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatsCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_KILLS, PREFIX_DEATHS, PREFIX_ASSISTS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ENTITY, PREFIX_KILLS, PREFIX_DEATHS, PREFIX_ASSISTS);
 
         EditStatsDescriptor editStatsDescriptor = new EditStatsDescriptor();
+
+        Entity targetEntity = ParserUtil.parseEntity(argMultimap.getValue(PREFIX_ENTITY)
+            .orElseThrow(() -> new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatsCommand.MESSAGE_USAGE))));
+        editStatsDescriptor.setEntity(targetEntity);
+
 
         if (argMultimap.getValue(PREFIX_KILLS).isPresent()) {
             editStatsDescriptor.setKills(ParserUtil.parseKills(argMultimap.getValue(PREFIX_KILLS).get()));

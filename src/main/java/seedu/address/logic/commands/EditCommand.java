@@ -24,6 +24,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.entity.EntityStatisticMap;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InGameName;
@@ -32,7 +33,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rank;
 import seedu.address.model.person.Role;
-import seedu.address.model.person.statistics.Statistics;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -110,7 +110,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         InGameName updatedIgn = editPersonDescriptor.getIgn().orElse(personToEdit.getIgn());
-        Statistics updatedStatistics = personToEdit.getStatistics();
+        EntityStatisticMap updatedStatistics = personToEdit.getOverallEntityStatistics();
         Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Rank updatedRank = editPersonDescriptor.getRank().orElse(personToEdit.getRank());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());

@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.entity.EntityStatisticMap;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.InGameName;
 import seedu.address.model.person.Name;
@@ -10,7 +11,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rank;
 import seedu.address.model.person.Role;
-import seedu.address.model.person.statistics.Statistics;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -34,7 +34,7 @@ public class PersonBuilder {
     private InGameName ign;
     private Rank rank;
     private Set<Tag> tags;
-    private Statistics statistics;
+    private EntityStatisticMap entityStatisticMap;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,7 +47,7 @@ public class PersonBuilder {
         ign = new InGameName(DEFAULT_IGN);
         rank = new Rank(DEFAULT_RANK);
         tags = new HashSet<>();
-        statistics = Statistics.createDefault();
+        entityStatisticMap = new EntityStatisticMap();
     }
 
     /**
@@ -61,7 +61,7 @@ public class PersonBuilder {
         ign = personToCopy.getIgn();
         rank = personToCopy.getRank();
         tags = new HashSet<>(personToCopy.getTags());
-        statistics = personToCopy.getStatistics();
+        entityStatisticMap = personToCopy.getOverallEntityStatistics();
     }
 
     /**
@@ -99,10 +99,12 @@ public class PersonBuilder {
     /**
      * Sets the {@code Statistics} of the {@code Person} that we are building.
      */
-    public PersonBuilder withStatistics(Statistics statistics) {
-        this.statistics = statistics;
+    public PersonBuilder withEntityStatistics(EntityStatisticMap map) {
+        this.entityStatisticMap = new EntityStatisticMap();
+        this.entityStatisticMap.putAll(map);
         return this;
     }
+
 
     /**
      * Sets the {@code Role} of the {@code Person} that we are building.
@@ -129,7 +131,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, role, ign, rank, tags, statistics);
+        return new Person(name, phone, email, role, ign, rank, tags, entityStatisticMap);
     }
 
 }

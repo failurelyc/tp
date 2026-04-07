@@ -39,7 +39,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final JsonAdaptedStatistics VALID_STATS = new JsonAdaptedStatistics(BENSON.getStatistics());
+    private static final JsonAdaptedEntityStatisticMap VALID_STATS =
+        new JsonAdaptedEntityStatisticMap(BENSON.getOverallEntityStatistics());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -138,18 +139,30 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidKills_throwsIllegalValueException() {
-        JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics(INVALID_KILLS, "0", "0");
+        JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics(
+            INVALID_KILLS, "0", "0");
+        JsonAdaptedEntityStatisticMap.EntityData entityData =
+            new JsonAdaptedEntityStatisticMap.EntityData(invalidStats);
+        java.util.Map<String, JsonAdaptedEntityStatisticMap.EntityData> statsMap = new java.util.HashMap<>();
+        statsMap.put("default", entityData);
+        JsonAdaptedEntityStatisticMap adaptedMap = new JsonAdaptedEntityStatisticMap(statsMap);
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-            VALID_IGN, VALID_ROLE, VALID_RANK, VALID_TAGS, invalidStats);
+            VALID_IGN, VALID_ROLE, VALID_RANK, VALID_TAGS, adaptedMap);
         String expectedMessage = Kills.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidDeaths_throwsIllegalValueException() {
-        JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics("0", INVALID_DEATHS, "0");
+        JsonAdaptedStatistics invalidStats = new JsonAdaptedStatistics(
+            "0", INVALID_DEATHS, "0");
+        JsonAdaptedEntityStatisticMap.EntityData entityData =
+            new JsonAdaptedEntityStatisticMap.EntityData(invalidStats);
+        java.util.Map<String, JsonAdaptedEntityStatisticMap.EntityData> statsMap = new java.util.HashMap<>();
+        statsMap.put("default", entityData);
+        JsonAdaptedEntityStatisticMap adaptedMap = new JsonAdaptedEntityStatisticMap(statsMap);
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-            VALID_IGN, VALID_ROLE, VALID_RANK, VALID_TAGS, invalidStats);
+            VALID_IGN, VALID_ROLE, VALID_RANK, VALID_TAGS, adaptedMap);
         String expectedMessage = seedu.address.model.person.statistics.Deaths.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
