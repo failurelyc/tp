@@ -178,5 +178,4 @@
 
    <!-- Selected Entity Label -->
    <Label fx:id="selectedEntityLabel" styleClass="field-label" wrapText="true" />
-
 </VBox>
