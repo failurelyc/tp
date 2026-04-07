@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.logic.commands.CommandResult;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for CompareCommand.
@@ -30,10 +29,10 @@ public class CompareCommandTest {
     public void execute_validIndicesUnfilteredList_success() {
         Person person1 = model.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person person2 = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        
+
         CompareCommand compareCommand = new CompareCommand("1", "2");
 
-        String expectedMessage = String.format(CompareCommand.MESSAGE_COMPARE_SUCCESS, 
+        String expectedMessage = String.format(CompareCommand.MESSAGE_COMPARE_SUCCESS,
                 Messages.format(person1), Messages.format(person2));
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false, true, person1, person2);

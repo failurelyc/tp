@@ -36,7 +36,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_IDENTIFIER = "Invalid identifier. Must be either a positive integer index or an IGN prefixed with 'i/'.";
+    public static final String MESSAGE_INVALID_IDENTIFIER =
+        "Invalid identifier. Must be either a positive integer index or an IGN prefixed with 'i/'.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -59,12 +60,12 @@ public class ParserUtil {
      */
     public static String parseIdentifier(String identifier) throws ParseException {
         String trimmed = identifier.trim();
-        
+
         // Check if it's a numeric index
         if (StringUtil.isNonZeroUnsignedInteger(trimmed)) {
             return trimmed;
         }
-        
+
         // Check if it's an IGN with prefix
         if (trimmed.startsWith("i/")) {
             String ign = trimmed.substring(2);
@@ -72,7 +73,7 @@ public class ParserUtil {
                 return ign;
             }
         }
-        
+
         throw new ParseException(MESSAGE_INVALID_IDENTIFIER);
     }
 

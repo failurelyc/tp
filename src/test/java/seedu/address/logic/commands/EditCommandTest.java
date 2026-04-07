@@ -188,8 +188,9 @@ public class EditCommandTest {
         String index = "1";
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(index, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{targetIdentifier=" + index + ", editPersonDescriptor="
-                + editPersonDescriptor + "}";
+        String expected = EditCommand.class.getCanonicalName()
+            + "{targetIdentifier=" + index + ", editPersonDescriptor="
+            + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 

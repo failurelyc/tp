@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,9 +18,11 @@ public class CompareCommand extends Command {
     public static final String COMMAND_WORD = "compare";
 
     public static final String MESSAGE_USAGE =
-            "Compares two players identified by their index numbers or in-game names (IGNs) in the displayed person list.";
+            "Compares two players identified by their index numbers"
+            + " or in-game names (IGNs) in the displayed person list.";
 
-    public static final String PARAMETERS = "Parameters: INDEX1 INDEX2 or i/IGN1 i/IGN2 or combinations (must be two identifiers)\n";
+    public static final String PARAMETERS =
+        "Parameters: INDEX1 INDEX2 or i/IGN1 i/IGN2 or combinations (must be two identifiers)\n";
 
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 2\n" + COMMAND_WORD + " i/Player1 i/Player2\n"
             + COMMAND_WORD + " 1 i/Player2";
