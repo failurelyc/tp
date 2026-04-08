@@ -21,11 +21,13 @@ public class CompareCommand extends Command {
     public static final String MESSAGE_USAGE =
             "Compares two players identified by their index numbers in the displayed person list.";
 
-    public static final String PARAMETERS = "Parameters: INDEX1 INDEX2 (must be two positive integers)\n";
+    public static final String PARAMETERS = "Parameters: INDEX1 INDEX2 (must be two different positive integers)\n";
 
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_COMPARE_SUCCESS = "Comparing players:\n%1$s\n%2$s";
+
+    public static final String MESSAGE_CANNOT_COMPARE_SAME_PLAYER = "The two indices must be different.";
 
     private final Index targetIndex1;
     private final Index targetIndex2;
@@ -51,6 +53,10 @@ public class CompareCommand extends Command {
 
         if (targetIndex2.getZeroBased() >= addressBookList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (targetIndex1.equals(targetIndex2)) {
+            throw new CommandException(MESSAGE_CANNOT_COMPARE_SAME_PLAYER);
         }
 
         Person person1 = addressBookList.get(targetIndex1.getZeroBased());
