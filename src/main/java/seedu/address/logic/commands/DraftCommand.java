@@ -95,7 +95,7 @@ public class DraftCommand extends Command {
         // Check for duplicate players
         for (int i = 0; i < selectedPlayers.size(); i++) {
             for (int j = i + 1; j < selectedPlayers.size(); j++) {
-                if (selectedPlayers.get(i).isSamePerson(selectedPlayers.get(j))) {
+                if (selectedPlayers.get(i).equals(selectedPlayers.get(j))) {
                     throw new CommandException(String.format(MESSAGE_DUPLICATE_PLAYER,
                             selectedPlayers.get(i).getName()));
                 }
