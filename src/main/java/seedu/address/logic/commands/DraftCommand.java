@@ -18,15 +18,16 @@ import seedu.address.model.person.Role.RoleType;
 /**
  * Drafts a team by validating the composition of selected players.
  * Players are selected by their indices in the person list or by their in-game name (IGN).
- * A valid draft requires exactly 5 players with one player per role.
+ * A valid draft requires exactly 5 unique players with one player per role (TOP, JUNGLE, MID, BOT, SUPPORT).
  */
 public class DraftCommand extends Command {
 
     public static final String COMMAND_WORD = "draft";
 
-    public static final String MESSAGE_USAGE = "Validates team composition using selected players.";
+    public static final String MESSAGE_USAGE = "Validates team composition using exactly 5 unique selected players.";
 
-    public static final String PARAMETERS = "Parameters: (INDEX | i/IGNNAME) [(INDEX | i/IGNNAME)]...\n";
+    public static final String PARAMETERS = "Parameters: (INDEX | i/IGNNAME) (INDEX | i/IGNNAME) "
+            + "(INDEX | i/IGNNAME) (INDEX | i/IGNNAME) (INDEX | i/IGNNAME)";
 
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 2 i/CarlK77 4 i/ElleM55";
 
