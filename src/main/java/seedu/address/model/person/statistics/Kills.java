@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Kills {
     public static final String MESSAGE_CONSTRAINTS =
-            "Kills should be a non-negative integer";
+            "Kills should be a non-negative integer and must not exceed Integer.MAX_VALUE";
     public static final String VALIDATION_REGEX = "\\d+";
     public final Integer value;
 
