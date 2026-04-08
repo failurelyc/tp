@@ -15,12 +15,12 @@ DraftDeck is a **desktop app for managing gaming teams and players, optimized fo
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-W09-2/tp/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-W09-2/tp/releases). Optionally, also download the images.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your DraftDeck.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you wish to use images, place the images folder here as well!
+If you wish to use images, place the downloaded images folder here as well!
 </div>
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar draftdeck.jar` command to run the application.<br>
@@ -71,7 +71,9 @@ If you wish to use images, place the images folder here as well!
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Core Commands
+
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -79,8 +81,21 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+#### Clearing all entries : `clear`
 
-### Adding a person: `add`
+Clears all entries from the player list.
+
+Format: `clear`
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Player management
+
+#### Adding a person: `add`
 
 Adds a player to the player list.
 
@@ -94,13 +109,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com i/JohnD88 r/MID rank/GOLD`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com i/Betsycrowe r/BOT rank/PLATINUM p/1234567`
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the player list.
-
-Format: `list`
-
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing person in the player list.
 
@@ -118,7 +127,28 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 r/JUNGLE rank/DIAMOND I` Edits the role and rank of the 3rd person.
 
-### Locating persons by name: `find`
+#### Listing all persons : `list`
+
+Shows a list of all persons in the player list.
+
+Format: `list`
+
+#### Deleting a person : `delete`
+
+Deletes the specified person from the player list.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the person indexed as `2` in the player list.
+
+### Search and Discovery
+
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -136,7 +166,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filtering persons : `filter`
+#### Filtering persons : `filter`
 
 Finds persons whose tags, roles, or entities contain any of the given keywords.
 
@@ -154,20 +184,9 @@ Examples:
 * `filter ent/Ahri ent/Yasuo` Returns people who have statistics for entity `Ahri` or `Yasuo`
 * `filter t/pro r/bot ent/Jinx` Returns people who are tagged `pro`, have role `BOT`, AND have statistics for entity `Jinx`
 
-### Deleting a person : `delete`
+### Sports and Analytics
 
-Deletes the specified person from the player list.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the person indexed as `2` in the player list.
-
-### Drafting a team : `draft`
+#### Drafting a team : `draft`
 
 Tests if a specific team composition is valid.
 
@@ -185,7 +204,7 @@ Examples:
 Example output:
 ![Sample output for valid composition](images/draftSuccess.png)
 
-### Comparing players : `compare`
+#### Comparing players : `compare`
 
 Compares two players identified by their index numbers.
 
@@ -199,7 +218,7 @@ Example:
 * `compare 1 2` Compares the 1st and 2nd indexed players in the current list.
 * `compare i/AlexY42 2` Compares the player with the IGN AlexY42 and the 2nd indexed player in the current list.
 
-### Updating player statistics : `stats`
+#### Updating player statistics : `stats`
 
 Updates the statistics of a player for a specific entity.
 
@@ -214,7 +233,7 @@ Examples:
 * `stats 1 ent/Ahri k/50 d/10 a/20` Adds 50 kills, 10 deaths, and 20 assists to player 1's Ahri statistics.
 * `stats 2 ent/Leona k/0 d/5 a/15` Adds 0 kills, 5 deaths, and 15 assists to player 2's Leona statistics.
 
-### Adding match results : `result`
+#### Adding match results : `result`
 
 Adds a match result to the match record.
 
@@ -229,17 +248,6 @@ Example:
 * `result w/WIN i/PlayerA ent/Ahri k/10 d/2 a/8 i/PlayerB ent/Leona k/1 d/1 a/12` Records a win where PlayerA played Ahri and PlayerB played Leona.
 * `result w/LOSE date/2026-04-08 i/PlayerC ent/Yasuo k/5 d/8 a/2` Records a loss on a specific date.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the player list.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Saving the data
 

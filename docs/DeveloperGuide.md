@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* League of Legends is a game made by Riot Games. All images and other associated intellectual property belongs to them.
 
 --------------------------------------------------------------------------------------------------------------------
 
