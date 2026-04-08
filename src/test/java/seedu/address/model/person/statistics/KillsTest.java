@@ -30,7 +30,7 @@ public class KillsTest {
         assertFalse(Kills.isValidKills(" ")); // spaces only
         assertFalse(Kills.isValidKills("911a")); // contains letters
         assertFalse(Kills.isValidKills("-1")); // negative number
-        assertFalse(Kills.isValidKills("124293842033123")); // number longer than Integer.MAX_VALUE 
+        assertFalse(Kills.isValidKills("124293842033123")); // number longer than Integer.MAX_VALUE
 
         // valid kills count
         assertTrue(Kills.isValidKills("911")); // normal number
