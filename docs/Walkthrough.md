@@ -20,27 +20,29 @@ Let's get started!
 
 ---
 
-## Step 1: Launch DraftDeck and Start Fresh
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you ever get stuck on a command, you can use the `help` command!
+</div>
 
-First, launch the application and clear any existing sample data to start with a clean slate.
+## Step 1: Launch DraftDeck and import the old roster.
 
-### Command:
-```
-clear
-```
+First, download the tutorial data file, found here.
+Download and unzip it. It should contain a `data` folder. Use it to overwrite the existing the data folder.
+Next, launch the application.
 
-**Expected Output:**
-All players will be removed from the list, and you'll see an empty player list.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If there is no data folder that exists, that's fine! It just means you haven't launched the app before. You can just paste the folder in and it will still work correctly.
+</div>
 
----
+## Step 1.5: Install images (Optional)
 
-## Step 2: Import the old roster.
+This step is optional, but recommended.
+If you downloaded the release with the image pack, simply drop the `image` folder the same way you dropped the `data` folder, then restart the app. The final directory containing the app should look like this.
 
-Now let's import the old roster. 
-First, close the application. Next, download data file containing them, found here.
-Download the folder, unzip it, and overwrite the existing the data folder.
 
-## Step 3: View Your Complete Roster
+The rest of the screenshots in this tutorial will assume you have installed the `image` folder.
+
+## Step 2: View Your Complete Roster
 
 Now let's see all your players at once.
 
@@ -51,6 +53,12 @@ list
 
 **Expected Output:**
 All 11 players are displayed in a numbered list, showing their name, phone, email, IGN, role, rank, and tags. You should see:
+
+![List](images/WalkthroughList.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If the list is empty, or contains fewer than 11 players, you probably imported the tutorial data incorrectly. In such a scenario, simply delete the data folder and restart from Step 1.
+</div>
 
 ---
 
@@ -67,13 +75,34 @@ add n/Koh Kai Jie p/93032101 e/kkj@gmail.com i/Dust r/TOP rank/Challenger t/Faer
 **Expected Output:**
 Scrolling to the bottom of the list, we see that he has been added to the list.
 
-However, he has no champions played yet.
+However, he has no champions played yet. This is expected - we have not added any stats for him!
+
+![Add](images/WalkthroughAdd.png)
 
 ## Step 5: Adding past matches
 
 There are two ways we can go about adding past matches. We can either use the `result` command, which keeps track of dates, or the `stats` command.
 
-For this case, we shall use the `stats` command.
+For this case, we shall use the `stats` command. There are three games that we want to include:
+
+| Champion | Kills | Deaths | Assists |
+| - | - | - | - |
+| Gwen | 2 | 9 | 4 |
+| Rumble | 16 | 20 | 18 |
+| Yorick | 3 | 6 | 5 |
+
+The commands are thus as follows:
+
+```
+stats 12 ent/Gwen k/2 d/9 a/4
+stats 12 ent/Rumble k/16 d/20 a/18
+stats 12 ent/Yorick k/3 d/6 a/5
+```
+
+**Expected Output:**
+Scrolling to the bottom of the list, we see that he now has three champions in his pool. Clicking on any one of them reveals the stats we have inputted.
+
+![Stats](images/WalkthroughStats.png)
 
 
 
@@ -82,55 +111,61 @@ For this case, we shall use the `stats` command.
 Let's say you need to quickly find players with specific criteria.
 
 ### Find by Name
-Search for players named "James."
+Search for players named "Chen."
 
 **Command:**
 ```
-find James
+find Chen
 ```
 
 **Expected Output:**
-Only James Wilson is displayed (index 3 in the original list).
+Lee Chen Ming and Chen Yi Hui are displayed.
+
+![Find](images/WalkthroughFind.png)
 
 ### Filter by Role
-View all players tagged as "starter."
+View all players tagged as "TOP."
 
 **Command:**
 ```
-filter t/starter
+filter r/top
 ```
 
 **Expected Output:**
-Displays Marcus Chen, Sarah Kim, James Wilson, Elena Rodriguez, and David Tan (all 5 starters).
+4 players are listed.
 
 ### Filter by Multiple Criteria
-Find all PLATINUM-ranked players who play JUNGLE or MID.
+Find all top players from team Impunity.
 
 **Command:**
 ```
-filter r/jungle r/mid rank/platinum
+filter r/top t/Impunity
 ```
 
 **Expected Output:**
-Displays Sarah Kim and Alex Turner (both PLATINUM rank with JUNGLE or MID roles).
+Only 1 player is listed, CYH.
 
 ---
 
 ## Step 7: Compare Two Players
 
-You're considering whether to start James Wilson or Alex Turner for an upcoming match. Let's compare them.
+You're considering whether to start Dust or Revive for an upcoming match. Let's compare them.
 
 ### Command:
 ```
-compare i/CaptainMid i/FlexSub
+compare i/Dust i/Revive
 ```
 
 **Expected Output:**
 A side-by-side comparison showing:
-- **CaptainMid (James Wilson):** MID, MASTER, starter, captain
-- **FlexSub (Alex Turner):** MID, PLATINUM, substitute
+- **Dust (Koh Kai Jie):** TOP, CHALLENGER
+- **Revive (Daniel Tan):** TOP, CHALLENGER
 
-This helps you make an informed decision - James has higher rank and captain experience.
+This helps you make an informed decision on their different champion pools. What they have in common, and what champions they each uniquely play compared to each other.
+
+In this case, the only common champion they play is Rumble.
+
+![Compare](images/WalkthroughCompare.png)
 
 ---
 
@@ -140,17 +175,17 @@ Now let's practice drafting a valid 5-player team. A valid team needs exactly on
 
 ### Command:
 ```
-draft 1 2 3 4 5
+draft 12 2 3 4 5
 ```
 
 **Expected Output:**
 ```
 ✓ Valid team composition!
-TOP: PhoenixTop (Marcus Chen)
-JUNGLE: WildJungle (Sarah Kim)
-MID: CaptainMid (James Wilson)
-BOT: StrikeADC (Elena Rodriguez)
-SUPPORT: GuardianSupport (David Tan)
+TOP: Dust
+JUNGLE: CraliX
+MID: Raven
+BOT: Ciela
+SUPPORT: Kra
 ```
 
 ### Try an Invalid Composition
@@ -158,101 +193,63 @@ Let's see what happens if we try to draft an invalid team (missing a role).
 
 **Command:**
 ```
-draft 1 2 3 4 6
+draft 12 2 3 4 6
 ```
 
 **Expected Output:**
-An error message indicating the team composition is invalid, likely because you're missing a SUPPORT player (index 6 is Alex Turner, a MID substitute).
+An error message indicating the team composition is invalid, because you're missing a SUPPORT player (index 6 is Blaire, a TOP laner).
 
 ---
 
-## Step 9: Record Match Statistics
+## Step 9: Record Match Result
 
-After a practice match, you need to update player statistics. Let's record that Marcus Chen performed exceptionally well on Ahri.
+Your team just won their first practice match! Let's record the result. This is the statline for each player.
+
+| Player | Champion | Kills | Deaths | Assists |
+| - | - | - | - | - |
+| Dust | Gwen | 3 | 0 | 4 |
+| CraliX | Zed | 5 | 1 | 2 |
+| Raven | Anivia | 1 | 6 | 5 |
+| Ciela | Zeri | 2 | 4 | 0 |
+| Kra | Ashe | 1 | 3 | 9 |
+
+We could use the `stats` command again, but since we are tracking multiple players, combined with the fact that this is a match our team played together, we can use the `result` command to add them all at once, as well as storing the date and match result for future reference.
 
 ### Command:
 ```
-stats 1 ent/Ahri k/15 d/3 a/8
+result w/WIN date/2026-09-01 i/Dust ent/Gwen k/3 d/0 a/4 i/CraliX ent/Zed k/5 d/1 a/2 i/Raven ent/Anivia k/1 d/6 a/5 i/Ciela ent/Zeri k/2 d/4 a/0 i/Kra ent/Ashe k/1 d/3 a/9
 ```
 
 **Expected Output:**
-A confirmation message indicating that Marcus Chen's statistics for Ahri have been updated:
-- Kills: 15
-- Deaths: 3
-- Assists: 8
+A confirmation message indicating that the match has been saved.
 
-### Update Another Player
-Let's also update Elena Rodriguez's performance on Jinx.
-
-**Command:**
 ```
-stats 4 ent/Jinx k/12 d/5 a/10
+Players: [Dust{statistics=Kills: 3, Deaths: 0, Assists: 4}, CraliX{statistics=Kills: 5, Deaths: 1, Assists: 2}, Raven{statistics=Kills: 1, Deaths: 6, Assists: 5}, Ciela{statistics=Kills: 2, Deaths: 4, Assists: 0}, Kra{statistics=Kills: 1, Deaths: 3, Assists: 9}]
 ```
 
-**Expected Output:**
-Confirmation that Elena's Jinx statistics have been updated.
-
----
-
-## Step 10: Record Match Results
-
-Your team just won their first practice match! Let's record the result.
-
-### Command:
-```
-result w/WIN i/PhoenixTop ent/Ahri k/15 d/3 a/8 i/WildJungle ent/LeeSin k/8 d/4 a/12 i/CaptainMid ent/Yasuo k/10 d/5 a/7 i/StrikeADC ent/Jinx k/12 d/5 a/10 i/GuardianSupport ent/Leona k/1 d/2 a/15
-```
-
-**Expected Output:**
-A confirmation message showing:
-- Match Result: WIN
-- Date: Today's date
-- Player statistics recorded for all 5 players:
-  - PhoenixTop: Ahri (15/3/8)
-  - WildJungle: LeeSin (8/4/12)
-  - CaptainMid: Yasuo (10/5/7)
-  - StrikeADC: Jinx (12/5/10)
-  - GuardianSupport: Leona (1/2/15)
-
----
-
-## Step 11: Player Management
+## Step 10: Player Management
 
 ### Editing Player Information
-David Tan has a new phone number.
+Dust has a new phone number.
 
 **Command:**
 ```
-edit 5 p/98765432
+edit 12 p/98765432
 ```
 
 **Expected Output:**
-Confirmation that David Tan's phone number has been updated.
+Confirmation that Dust's phone number has been updated.
 
 ### Removing a Player
-If you need to remove a player from your roster:
+If you need to remove a player from your the list:
 
 **Command:**
 ```
-delete 6
+delete 1
 ```
 
 **Expected Output:**
-Alex Turner (the substitute) is removed from the roster. The remaining players are renumbered accordingly.
-
----
-
-## Step 12: Get Help
-
-At any time, if you forget how to use a command:
-
-**Command:**
-```
-help
-```
-
-**Expected Output:**
-A help window opens showing all available commands and their formats.
+Revive is removed from the list. The remaining players are renumbered accordingly.
 
 ---
 
