@@ -28,8 +28,8 @@ public class DraftCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Validates team composition using exactly 5 unique selected players.";
 
-    public static final String PARAMETERS = "Parameters: (INDEX | i/IGNNAME) (INDEX | i/IGNNAME) "
-            + "(INDEX | i/IGNNAME) (INDEX | i/IGNNAME) (INDEX | i/IGNNAME)";
+    public static final String PARAMETERS = "Parameters: (INDEX | i/IGN) (INDEX | i/IGN) "
+            + "(INDEX | i/IGN) (INDEX | i/IGN) (INDEX | i/IGN)";
 
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 2 i/CarlK77 4 i/ElleM55";
 

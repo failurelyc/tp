@@ -206,7 +206,7 @@ Example:
 
 Tests if a specific team composition is valid.
 
-Format: `draft (INDEX | i/IGNNAME) (INDEX | i/IGNNAME) (INDEX | i/IGNNAME) (INDEX | i/IGNNAME) (INDEX | i/IGNNAME) …​`
+Format: `draft (INDEX | i/IGN) (INDEX | i/IGN) (INDEX | i/IGN) (INDEX | i/IGN) (INDEX | i/IGN)​`
 
 * Selects 5 players by their index numbers or in-game names (IGN).
 * A valid team requires exactly 5 players with one player per role (TOP, JUNGLE, MID, BOT, SUPPORT).
