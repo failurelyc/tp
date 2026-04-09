@@ -30,11 +30,11 @@ public class AssistsTest {
         assertFalse(Assists.isValidAssists(" ")); // spaces only
         assertFalse(Assists.isValidAssists("911a")); // contains letters
         assertFalse(Assists.isValidAssists("-1")); // negative number
+        assertFalse(Assists.isValidAssists("124293842033123")); // long number exceeding Integer.MAX_VALUE
 
         // valid assists count
         assertTrue(Assists.isValidAssists("911")); // normal number
         assertTrue(Assists.isValidAssists("0")); // zero
-        assertTrue(Assists.isValidAssists("124293842033123")); // long number
     }
 
     @Test
@@ -62,6 +62,13 @@ public class AssistsTest {
         Assists assists1 = new Assists("5");
         Assists assists2 = new Assists("10");
         assertEquals(new Assists("15"), assists1.add(assists2));
+    }
+
+    @Test
+    public void add_withOverflow_returnsMaxValue() {
+        Assists assists1 = new Assists(String.valueOf(Integer.MAX_VALUE - 1));
+        Assists assists2 = new Assists("5");
+        assertEquals(new Assists(String.valueOf(Integer.MAX_VALUE)), assists1.add(assists2));
     }
 
     @Test

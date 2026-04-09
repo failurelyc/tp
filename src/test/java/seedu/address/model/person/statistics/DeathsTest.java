@@ -30,11 +30,11 @@ public class DeathsTest {
         assertFalse(Deaths.isValidDeaths(" ")); // spaces only
         assertFalse(Deaths.isValidDeaths("911a")); // contains letters
         assertFalse(Deaths.isValidDeaths("-1")); // negative number
+        assertFalse(Deaths.isValidDeaths("124293842033123")); // long number exceeding Integer.MAX_VALUE
 
         // valid deaths count
         assertTrue(Deaths.isValidDeaths("911")); // normal number
         assertTrue(Deaths.isValidDeaths("0")); // zero
-        assertTrue(Deaths.isValidDeaths("124293842033123")); // long number
     }
 
     @Test
@@ -55,6 +55,26 @@ public class DeathsTest {
 
         // different values -> returns false
         assertFalse(deaths.equals(new Deaths("20")));
+    }
+
+    @Test
+    public void add() {
+        Deaths deaths1 = new Deaths("5");
+        Deaths deaths2 = new Deaths("10");
+        assertEquals(new Deaths("15"), deaths1.add(deaths2));
+    }
+
+    @Test
+    public void add_withOverflow_returnsMaxValue() {
+        Deaths deaths1 = new Deaths(String.valueOf(Integer.MAX_VALUE - 1));
+        Deaths deaths2 = new Deaths("5");
+        assertEquals(new Deaths(String.valueOf(Integer.MAX_VALUE)), deaths1.add(deaths2));
+    }
+
+    @Test
+    public void toStringMethod() {
+        Deaths deaths = new Deaths("15");
+        assertEquals("15", deaths.toString());
     }
 
     @Test

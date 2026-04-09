@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Player's total number of kills.
- * Guarantees: immutable; is valid as declared in {@link #isValidKills(String)}
+ * Represents a Player's total number of kills. Guarantees: immutable; is valid as declared in
+ * {@link #isValidKills(String)}
  */
 public class Kills {
     public static final String MESSAGE_CONSTRAINTS =
-            "Kills should be a non-negative integer";
+            "Kills should be a non-negative integer and must not exceed Integer.MAX_VALUE";
     public static final String VALIDATION_REGEX = "\\d+";
     public final Integer value;
 
@@ -32,15 +32,27 @@ public class Kills {
      * Returns true if a given string is a valid kills count.
      */
     public static boolean isValidKills(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        try {
+            Integer.parseInt(test);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     /**
      * Returns a new Kills containing the sum of this Kills and the other Kills.
+     *
      * @param other the other kills
      * @return a new Kills containing the sum
      */
     public Kills add(Kills other) {
+        if (Integer.MAX_VALUE - this.value < other.value) {
+            return new Kills(Integer.MAX_VALUE);
+        }
         return new Kills(this.value + other.value);
     }
 

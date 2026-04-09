@@ -9,6 +9,7 @@ import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandUtil;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,21 +19,24 @@ import seedu.address.model.person.Role.RoleType;
 /**
  * Drafts a team by validating the composition of selected players.
  * Players are selected by their indices in the person list or by their in-game name (IGN).
- * A valid draft requires exactly 5 players with one player per role.
+ * A valid draft requires exactly 5 unique players with one player per role (TOP, JUNGLE, MID, BOT, SUPPORT).
  */
 public class DraftCommand extends Command {
 
     public static final String COMMAND_WORD = "draft";
 
-    public static final String MESSAGE_USAGE = "Validates team composition using selected players.";
+    public static final String MESSAGE_USAGE = "Validates team composition using exactly 5 unique selected players.";
 
-    public static final String PARAMETERS = "Parameters: (INDEX | i/IGNNAME) [(INDEX | i/IGNNAME)]...\n";
+    public static final String PARAMETERS = "Parameters: (INDEX | i/IGNNAME) (INDEX | i/IGNNAME) "
+            + "(INDEX | i/IGNNAME) (INDEX | i/IGNNAME) (INDEX | i/IGNNAME)";
 
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 2 i/CarlK77 4 i/ElleM55";
 
     public static final String MESSAGE_SUCCESS = "Draft validation complete: %1$s";
     public static final String MESSAGE_INVALID_IGN_NOT_FOUND = "Player with IGN '%1$s' not found";
     public static final String MESSAGE_INVALID_IGN_EMPTY = "IGN cannot be empty. Use format: i/playername";
+    public static final String MESSAGE_INVALID_TEAM_SIZE = "Draft requires exactly 5 players. You provided %1$d";
+    public static final String MESSAGE_DUPLICATE_PLAYER = "Duplicate player selected: %1$s";
 
     private static final int REQUIRED_TEAM_SIZE = 5;
     private static final int REQUIRED_PLAYERS_PER_ROLE = 1;
@@ -71,16 +75,21 @@ public class DraftCommand extends Command {
 
         // Resolve IGNs
         for (String ign : igns) {
-            boolean found = false;
-            for (Person person : addressBookList) {
-                if (person.getIgn().value.equals(ign)) {
-                    selectedPlayers.add(person);
-                    found = true;
-                    break;
+            selectedPlayers.add(CommandUtil.findPersonByIdentifier(addressBookList, ign));
+        }
+
+        // Check for exactly 5 unique players
+        if (selectedPlayers.size() != REQUIRED_TEAM_SIZE) {
+            throw new CommandException(String.format(MESSAGE_INVALID_TEAM_SIZE, selectedPlayers.size()));
+        }
+
+        // Check for duplicate players
+        for (int i = 0; i < selectedPlayers.size(); i++) {
+            for (int j = i + 1; j < selectedPlayers.size(); j++) {
+                if (selectedPlayers.get(i).equals(selectedPlayers.get(j))) {
+                    throw new CommandException(String.format(MESSAGE_DUPLICATE_PLAYER,
+                            selectedPlayers.get(i).getName()));
                 }
-            }
-            if (!found) {
-                throw new CommandException(String.format(MESSAGE_INVALID_IGN_NOT_FOUND, ign));
             }
         }
 
