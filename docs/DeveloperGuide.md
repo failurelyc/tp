@@ -302,7 +302,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a player with specific details.
+1.  User requests to add a player with name, phone, email, IGN, role, rank, and optional tags.
 2.  DraftDeck adds the player to the roster.
 3.  DraftDeck displays a success message and the details of the newly added player.
 
@@ -316,9 +316,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 1b. DraftDeck detects an invalid parameter value.
+* 1b. DraftDeck detects an invalid parameter value (e.g., invalid phone format, invalid role).
 
     * 1b1. DraftDeck displays an error message specific to the invalid field.
+
+    Use case ends.
+
+* 1c. DraftDeck detects that a player with the same details already exists.
+
+    * 1c1. DraftDeck displays an error message indicating the duplicate.
 
     Use case ends.
 
@@ -328,7 +334,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list players.
 2.  DraftDeck shows a list of players.
-3.  User requests to delete a specific player in the list.
+3.  User requests to delete a specific player in the list by index.
 4.  DraftDeck deletes the player.
 
     Use case ends.
@@ -339,20 +345,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given index is invalid (not a positive integer or out of range).
 
     * 3a1. DraftDeck shows an error message.
 
     Use case resumes at step 2.
 
-**UC03 - Filter players**
+**Use case: UC03 - Filter players**
 
 **MSS**
 
 1.  User requests to list players.
 2.  DraftDeck shows a list of players.
-3.  User requests to filter players in the list by a certain attribute.
-4.  DraftDeck shows a filtered list of players.
+3.  User requests to filter players by tags, roles, entities, or any combination.
+4.  DraftDeck shows a filtered list of players matching the specified criteria.
 
     Use case ends.
 
@@ -362,20 +368,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 3a. The given filter is invalid.
+* 3a. No players match the filter criteria.
 
-    * 3a1. DraftDeck shows an error message.
+    * 3a1. DraftDeck shows an empty list.
 
-    Use case resumes at step 2.
+    Use case ends.
 
-**UC04 - Compare two player**
+**Use case: UC04 - Compare two players**
 
 **MSS**
 
 1.  User requests to list players.
 2.  DraftDeck shows a list of players.
-3.  User requests to compare two specific players in the list.
-4.  DraftDeck shows a comparison of the selected players.
+3.  User requests to compare two specific players by their indices or IGNs.
+4.  DraftDeck displays a side-by-side comparison of the selected players.
 
     Use case ends.
 
@@ -385,13 +391,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 3a. The given index(es) is invalid.
+* 3a. The given index is invalid (not a positive integer or out of range).
 
-    *3a1. DraftDeck shows an error message.
+    * 3a1. DraftDeck shows an error message.
 
     Use case resumes at step 2.
 
+* 3b. The given IGN is not found in the player list.
 
+    * 3b1. DraftDeck shows an error message.
+
+    Use case resumes at step 2.
+
+* 3c. Both indices or both IGNs refer to the same player.
+
+    * 3c1. DraftDeck shows an error message indicating that different players must be selected.
+
+    Use case resumes at step 2.
 
 **Use case: UC05 - Edit a player**
 
@@ -399,8 +415,78 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list players.
 2. DraftDeck shows a list of players.
-3. User requests to edit a specific player in the list.
-4. DraftDeck edits the player and shows a success message.
+3. User requests to edit a specific player in the list with one or more fields.
+4. DraftDeck updates the player and shows a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+     Use case ends.
+
+* 3a. There are no fields to edit.
+
+    * 3a1. DraftDeck displays an error message notifying the user that at least one field must be provided.
+
+   Use case resumes at step 2.
+
+* 3b. The given index is invalid (not a positive integer or out of range).
+
+   * 3b1. DraftDeck displays an error message and shows the correct index range.
+
+   Use case resumes at step 2.
+
+* 3c. The edited player would be a duplicate of another player.
+
+   * 3c1. DraftDeck displays an error message indicating the duplicate.
+
+   Use case resumes at step 2.
+
+**Use case: UC06 - Input match results**
+
+**MSS**
+
+1. User requests to add a match result with match outcome (WIN/LOSE/DRAW), optional date, and player statistics.
+2. DraftDeck adds the match to the match record and updates the statistics of all players involved.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The result is invalid (not WIN, LOSE, or DRAW).
+
+   * 1a1. DraftDeck displays an error message notifying the user that the result must be one of "WIN", "LOSE", or "DRAW".
+
+    Use case resumes at step 1.
+
+* 1b. The number of IGNs, entities, and statistics groups do not match.
+
+   * 1b1. DraftDeck displays an error message notifying the user that the number of each parameter must match the number of players.
+
+    Use case resumes at step 1.
+
+* 1c. At least one statistic is invalid (negative values or not integers).
+
+   * 1c1. DraftDeck displays an error message notifying the user that every statistic must be a non-negative integer.
+
+    Use case resumes at step 1.
+
+* 1d. At least one player (by IGN) does not exist in DraftDeck.
+
+   * 1d1. DraftDeck displays an error message notifying the user that all players must already exist in DraftDeck.
+
+    Use case resumes at step 1.
+
+**Use case: UC07 - Draft a team**
+
+**MSS**
+
+1. User requests to list players.
+2. DraftDeck shows a list of players.
+3. User requests to draft a team by selecting 5 players using indices or IGNs.
+4. DraftDeck validates the team composition and displays the result.
 
    Use case ends.
 
@@ -410,54 +496,152 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 3a. There are no fields to edit.
+* 3a. The number of selected players is not exactly 5.
 
-    * 3a1. DraftDeck displays an error message notifying the user that there must be at least one field.
+    * 3a1. DraftDeck displays an error message indicating the invalid team size.
 
-   Use case resumes at step 2.
+    Use case resumes at step 2.
 
-* 3b. The given index is invalid.
+* 3b. The given index is invalid (not a positive integer or out of range).
 
-   * 3b1. DraftDeck displays an error message and shows the correct index range.
+    * 3b1. DraftDeck shows an error message.
 
-   Use case resumes at step 2.
+    Use case resumes at step 2.
 
-**Use case: UC06 - Input match results**
+* 3c. The given IGN is not found in the player list.
+
+    * 3c1. DraftDeck shows an error message.
+
+    Use case resumes at step 2.
+
+* 3d. The same player is selected multiple times.
+
+    * 3d1. DraftDeck displays an error message indicating duplicate players.
+
+    Use case resumes at step 2.
+
+* 3e. The team composition is invalid (missing roles or duplicate roles).
+
+    * 3e1. DraftDeck displays validation errors showing which roles are missing or duplicated.
+
+    Use case ends (validation is still performed).
+
+**Use case: UC08 - Update player statistics**
 
 **MSS**
 
-1. User requests to add in match results
-2. DraftDeck adds the match and updates the statistics of players involved.
+1. User requests to list players.
+2. DraftDeck shows a list of players.
+3. User requests to update statistics for a specific player and entity with kills, deaths, and/or assists.
+4. DraftDeck updates the player's statistics for that entity and shows a success message.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The result is invalid.
+* 2a. The list is empty.
 
-   * 1a1. DraftDeck displays an error message notifying the user that the result must be one of “win”, “lose”, “draw”
+    Use case ends.
 
-    Use case resumes at step 1.
+* 3a. The given index is invalid (not a positive integer or out of range).
 
-* 1b. The number of players and the number of values for each of the statistics do not match.
+    * 3a1. DraftDeck displays an error message.
 
-   * 1b1. DraftDeck displays an error message notifying the user that the number of each statistic must match the number of players.
+    Use case resumes at step 2.
 
-    Use case resumes at step 1.
+* 3b. The given IGN is not found in the player list.
 
-* 1c. At least one statistic is invalid.
+    * 3b1. DraftDeck displays an error message.
 
-   * 1c1. DraftDeck displays an error message notifying the user that every statistic must be a non negative integer.
+    Use case resumes at step 2.
 
-    Use case resumes at step 1.
+* 3c. No statistics fields are provided.
 
-* 1d. At least one player does not exist in DraftDeck.
+    * 3c1. DraftDeck displays an error message notifying the user that at least one statistic field must be provided.
 
-   * 1d1. DraftDeck displays an error message notifying the user every player must already exist in DraftDeck.
+    Use case resumes at step 2.
 
-    Use case resumes at step 1.
+**Use case: UC09 - Find players by name**
 
-*{More to be added}*
+**MSS**
+
+1. User requests to list players.
+2. DraftDeck shows a list of players.
+3. User requests to find players by name keywords.
+4. DraftDeck shows a list of players whose names match any of the keywords.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. No players match the keywords.
+
+    * 3a1. DraftDeck shows an empty list.
+
+    Use case ends.
+
+**Use case: UC10 - List all players**
+
+**MSS**
+
+1. User requests to list all players.
+2. DraftDeck shows all players in the roster.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The roster is empty.
+
+    * 1a1. DraftDeck shows an empty list.
+
+    Use case ends.
+
+**Use case: UC11 - Clear all players**
+
+**MSS**
+
+1. User requests to clear all players.
+2. DraftDeck displays a confirmation prompt.
+3. User confirms the clear operation.
+4. DraftDeck removes all players from the roster.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. User cancels the operation.
+
+    Use case ends (no changes made).
+
+* 2b. The roster is already empty.
+
+    * 2b1. DraftDeck displays a message indicating the roster is already empty.
+
+    Use case ends.
+
+**Use case: UC12 - View help**
+
+**MSS**
+
+1. User requests to view help.
+2. DraftDeck displays the help window with command usage information.
+
+   Use case ends.
+
+**Use case: UC13 - Exit the application**
+
+**MSS**
+
+1. User requests to exit the application.
+2. DraftDeck saves all data.
+3. DraftDeck closes the application.
+
+   Use case ends.
 
 ### Non-Functional Requirements
 
