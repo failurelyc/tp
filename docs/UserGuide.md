@@ -43,7 +43,7 @@ If you wish to use images, place the downloaded images folder here as well!
 1. Refer to the [Features](#features) below for details of each command.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-First time using this app? Consider going through the [walkthrough](#walkthrough) first to get a feel for things!
+First time using this app? Consider going through the [walkthrough](#walkthrough-setting-up-the-national-esports-team) first to get a feel for things!
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
