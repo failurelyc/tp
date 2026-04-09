@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RESULT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -120,6 +121,16 @@ public class CommandTestUtil {
     public static final String RANK_DESC_BOB = " " + PREFIX_RANK + VALID_RANK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String KDA_DESC_SET_1 = " " + PREFIX_STATS
+            + VALID_KILLS_SET_1 + "-" + VALID_DEATHS_SET_1 + "-" + VALID_ASSISTS_SET_1;
+    public static final String KDA_DESC_SET_2 = " " + PREFIX_STATS
+            + VALID_KILLS_SET_2 + "-" + VALID_DEATHS_SET_2 + "-" + VALID_ASSISTS_SET_2;
+    public static final String KDA_DESC_SET_3 = " " + PREFIX_STATS
+            + VALID_KILLS_SET_3 + "-" + VALID_DEATHS_SET_3 + "-" + VALID_ASSISTS_SET_3;
+    public static final String KDA_DESC_SET_4 = " " + PREFIX_STATS
+            + VALID_KILLS_SET_4 + "-" + VALID_DEATHS_SET_4 + "-" + VALID_ASSISTS_SET_4;
+    public static final String KDA_DESC_SET_5 = " " + PREFIX_STATS
+            + VALID_KILLS_SET_5 + "-" + VALID_DEATHS_SET_5 + "-" + VALID_ASSISTS_SET_5;
     public static final String KILLS_DESC_SET_1 = " " + PREFIX_KILLS + VALID_KILLS_SET_1;
     public static final String KILLS_DESC_SET_2 = " " + PREFIX_KILLS + VALID_KILLS_SET_2;
     public static final String KILLS_DESC_SET_3 = " " + PREFIX_KILLS + VALID_KILLS_SET_3;
