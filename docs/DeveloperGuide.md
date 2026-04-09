@@ -9,9 +9,16 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+This project is adapted from AddressBook-Level3, which is made by the SE-EDU initiative.
+
 * League of Legends is a game made by Riot Games. All images and other associated intellectual property belongs to them.
-* AI was used for code autocompletion, bug finding and fixing, as well as ensuring the accuracy of documentation.
+* Multiple AI tools were used for code autocompletion, bug finding and fixing, as well as ensuring the accuracy of documentation.
 * The Help function code was reused from Jun Hung's IP.
+
+Furthermore, the following third-party libraries/frameworks are used.
+* JavaFX for GUI
+* Jackson for JSON utilities
+* JUnit 5 for testing
 
 --------------------------------------------------------------------------------------------------------------------
 
