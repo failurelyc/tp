@@ -285,12 +285,12 @@ Revive is removed from the list. The remaining players are renumbered accordingl
 
 Congratulations! You've successfully:
 
-✓ Built a complete 5-player team roster  
-✓ Viewed and searched through your players  
-✓ Compared players to make roster decisions  
-✓ Drafted a valid team composition  
-✓ Recorded player statistics  
-✓ Documented match results  
+✓ Built a complete 5-player team roster
+✓ Viewed and searched through your players
+✓ Compared players to make roster decisions
+✓ Drafted a valid team composition
+✓ Recorded player statistics
+✓ Documented match results
 
 Your team is now set up and ready for the tournament! You can continue to use DraftDeck to:
 
