@@ -309,7 +309,5 @@ Action | Format, Examples
 
 # Walkthrough
 <div data-toc-skip>
-{% raw %}
 {% include Walkthrough.md %}
-{% endraw %}
 </div>
