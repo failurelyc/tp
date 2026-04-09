@@ -305,7 +305,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   * The new player is added to DraftDeck with the specified details only if the given details are valid.
   * The new player is not added to DraftDeck if the given details are invalid.
-  * Existing players remain unchanged if the add operation fails.
+  * Existing players remain unchanged.
 
   **MSS**
 
@@ -337,16 +337,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   **Use case: UC02 - Delete a player**
 
-  **Preconditions**
-
-  * DraftDeck is running and ready to accept commands.
-  * The player list is currently displayed (UC10 has been executed).
-
   **Guarantees**
 
   * The specified player is deleted from DraftDeck if the index is valid.
   * No player is deleted if the index is invalid.
-  * All other players remain unchanged.
+  * All other players remain unchanged, except for their index.
 
   **MSS**
 
@@ -365,11 +360,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes at step 1.
 
   **Use case: UC03 - Filter players**
-
-  **Preconditions**
-
-  * DraftDeck is running and ready to accept commands.
-  * The player list is currently displayed (UC10 has been executed).
 
   **Guarantees**
 
