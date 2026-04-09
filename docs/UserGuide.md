@@ -42,6 +42,10 @@ If you wish to use images, place the downloaded images folder here as well!
 
 1. Refer to the [Features](#features) below for details of each command.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+First time using this app? Consider going through the [walkthrough](#walkthrough) first to get a feel for things!
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -301,3 +305,8 @@ Action | Format, Examples
 
 * **IGN**: In-Game Name, a player's username in the game
 * **Entity**: An umbrella term for a character that the player plays in the game. In League of Legends, this refers to a 'Champion'. In other games, this may refer to an 'Agent', 'Operator', 'Hero', or whatever term that particular game uses.
+
+
+### Walkthrough
+
+{% include Walkthrough.md %}
