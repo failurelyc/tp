@@ -7,7 +7,7 @@ title: Walkthrough
 
 Welcome to DraftDeck! This walkthrough will guide you through a realistic scenario where you're a team manager setting up a new esports team for an upcoming tournament. You'll learn how to use DraftDeck's key features to manage players, analyze data, and prepare your team for competition.
 
-## Scenario Overview
+## Scenario Overview {:.no_toc}
 
 You've just been hired as the team manager for the Singapore National Esports team, ahead of the upcoming Asian Games. Your first task is to:
 
@@ -24,7 +24,7 @@ Let's get started!
 If you ever get stuck on a command, you can use the `help` command!
 </div>
 
-## Step 1: Launch DraftDeck and import the old roster.
+## Step 1: Launch DraftDeck and import the old roster. {:.no_toc}
 
 First, download the tutorial data file, found here.
 Download and unzip it. It should contain a `data` folder. Use it to overwrite the existing the data folder.
@@ -34,7 +34,7 @@ Next, launch the application.
 If there is no data folder that exists, that's fine! It just means you haven't launched the app before. You can just paste the folder in and it will still work correctly.
 </div>
 
-## Step 1.5: Install images (Optional)
+## Step 1.5: Install images (Optional) {:.no_toc}
 
 This step is optional, but recommended.
 If you downloaded the release with the image pack, simply drop the `image` folder the same way you dropped the `data` folder, then restart the app. The final directory containing the app should look like this.
@@ -42,7 +42,7 @@ If you downloaded the release with the image pack, simply drop the `image` folde
 
 The rest of the screenshots in this tutorial will assume you have installed the `image` folder.
 
-## Step 2: View Your Complete Roster
+## Step 2: View Your Complete Roster {:.no_toc}
 
 Now let's see all your players at once.
 
@@ -62,7 +62,7 @@ If the list is empty, or contains fewer than 11 players, you probably imported t
 
 ---
 
-## Step 4: Add new Players
+## Step 3: Add new Players {:.no_toc}
 
 Between the last Asian Games and the current one, some new talent has emerged.
 Specifically, a certain 'Koh Kai Jie' from team 'FaerieCharm'. His IGN is 'Dust', his rank is Challenger, and he plays the top lane.
@@ -79,7 +79,7 @@ However, he has no champions played yet. This is expected - we have not added an
 
 ![Add](images/WalkthroughAdd.png)
 
-## Step 5: Adding past matches
+## Step 4: Adding past matches {:.no_toc}
 
 There are two ways we can go about adding past matches. We can either use the `result` command, which keeps track of dates, or the `stats` command.
 
@@ -106,7 +106,7 @@ Scrolling to the bottom of the list, we see that he now has three champions in h
 
 
 
-## Step 6: Find Specific Players
+## Step 5: Find Specific Players {:.no_toc}
 
 Let's say you need to quickly find players with specific criteria.
 
@@ -147,7 +147,7 @@ Only 1 player is listed, CYH.
 
 ---
 
-## Step 7: Compare Two Players
+## Step 6: Compare Two Players {:.no_toc}
 
 You're considering whether to start Dust or Revive for an upcoming match. Let's compare them.
 
@@ -169,7 +169,7 @@ In this case, the only common champion they play is Rumble.
 
 ---
 
-## Step 8: Draft a Valid Team Composition
+## Step 7: Draft a Valid Team Composition {:.no_toc}
 
 Now let's practice drafting a valid 5-player team. A valid team needs exactly one player for each role.
 
@@ -201,7 +201,7 @@ An error message indicating the team composition is invalid, because you're miss
 
 ---
 
-## Step 9: Record Match Result
+## Step 8: Record Match Result {:.no_toc}
 
 Your team just won their first practice match! Let's record the result. This is the statline for each player.
 
@@ -227,7 +227,7 @@ A confirmation message indicating that the match has been saved.
 Players: [Dust{statistics=Kills: 3, Deaths: 0, Assists: 4}, CraliX{statistics=Kills: 5, Deaths: 1, Assists: 2}, Raven{statistics=Kills: 1, Deaths: 6, Assists: 5}, Ciela{statistics=Kills: 2, Deaths: 4, Assists: 0}, Kra{statistics=Kills: 1, Deaths: 3, Assists: 9}]
 ```
 
-## Step 10: Player Management
+## Step 9: Player Management {:.no_toc}
 
 ### Editing Player Information
 Dust has a new phone number.
