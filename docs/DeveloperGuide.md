@@ -767,7 +767,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Application starts with a preset player list and creates a new data file.
 
    1. Close the application. Corrupt the `data/addressbook.json` file (e.g., add invalid JSON). Re-launch.<br>
-      Expected: Application starts with a preset player list and a new valid data file is created.
+      Expected: Application starts with an empty player list.
 
 ### Error handling
 
