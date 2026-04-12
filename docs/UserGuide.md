@@ -118,8 +118,8 @@ A player can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com i/JohnD88 r/MID rank/GOLD`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com i/Betsycrowe r/BOT rank/PLATINUM p/1234567`
+* `add n/John Doe p/98765432 e/johnd@example.com i/JohnD88 r/MID rank/GOLD II`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com i/Betsycrowe r/BOT rank/PLATINUM I p/1234567`
 
 #### Deleting a person : `delete`
 
