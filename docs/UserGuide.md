@@ -19,21 +19,21 @@ DraftDeck is a **desktop app for managing gaming teams and players, optimized fo
 
 3. Copy the file to the folder you want to use as the _home folder_ for your DraftDeck.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Important:**
-Ensure the folder is **not write-protected**. DraftDeck will not work properly if placed in a write-protected directory, as it needs to create data files and configuration files.
-</div>
+   <div markdown="span" class="alert alert-warning">:exclamation: **Important:**
+   Ensure the folder is **not write-protected**. DraftDeck will not work properly if placed in a write-protected directory, as it needs to create data files and configuration files.
+   </div>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you wish to use images, place the downloaded images folder here as well!
-</div>
+   <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+   If you wish to use images, place the downloaded images folder here as well!
+   </div>
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar draftdeck.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Note:**
-Double-clicking the jar file might not work on some systems. If this happens, use the command line method: open Command Prompt/Terminal, navigate to the folder containing the jar file, and type `java -jar draftdeck.jar`.
-</div>
+   <div markdown="span" class="alert alert-warning">:exclamation: **Note:**
+   Double-clicking the jar file might not work on some systems. If this happens, use the command line method: open Command Prompt/Terminal, navigate to the folder containing the jar file, and type `java -jar draftdeck.jar`.
+   </div>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -122,7 +122,7 @@ A player can have any number of tags (including 0)
 <div markdown="1" class="alert alert-primary"> **What counts as a unique player?**
 <br>
 * The player's IGN must not match IGNs that are already present in the app.
-* Note that IGNs are not case-sensitive and limited to 16 characters (to comply with League of Legends' IGN length limit).  
+* Note that IGNs are not case-sensitive and are limited to 16 characters (to comply with League of Legends' IGN length limit).  
 * Players with the same name but different IGNs are considered unique, since different players may have the same name, while the uniqueness of IGNs is enforced by the game.
 </div>
 
@@ -233,8 +233,8 @@ Clicking on an entity icon in the comparison screen compares statistics for that
 Click on the same entity icon again to revert to overall statistics comparison.
 </div>
 Example:
-* `compare 1 2` Compares the 1st and 2nd indexed players in the current list.
-* `compare i/AlexY42 2` Compares the player with the IGN AlexY42 and the 2nd indexed player in the current list.
+* `compare 1 2` Compares the 1st and 2nd indexed players in the full list.
+* `compare i/AlexY42 2` Compares the player with the IGN AlexY42 and the 2nd indexed player in the full list.
 
 #### Drafting a team : `draft`
 
@@ -354,7 +354,7 @@ Action | Format, Examples
 
 ### Glossary
 
-* **IGN**: In-Game Name, a player's username in the game
+* **IGN**: In-Game Name, a player's username in the game. Limited to 16 characters and case-insensitive to align with League of Legends' IGN rules.
 * **Entity**: An umbrella term for a character played by the player in the game. In League of Legends, this refers to a 'Champion'. In other games, this may refer to an 'Agent', 'Operator', 'Hero', or whatever term that particular game uses.
 
 
@@ -585,16 +585,14 @@ We could use the `stats` command again, but since we are tracking multiple playe
 ### Command:
 {:.no_toc}
 
-```
-result w/WIN date/2026-09-01 i/Dust ent/Gwen s/3-0-4 i/CraliX ent/Zed s/5-1-2 i/Raven ent/Anivia s/1-6-5 i/Ciela ent/Zeri s/2-4-0 i/Kra ent/Ashe s/1-3-9
-```
+`result w/WIN date/2026-09-01 i/Dust ent/Gwen s/3-0-4 i/CraliX ent/Zed s/5-1-2 i/Raven ent/Anivia s/1-6-5 i/Ciela ent/Zeri s/2-4-0 i/Kra ent/Ashe s/1-3-9`
 
 **Expected Output:**
 A confirmation message indicating that the match has been saved.
 
-```
-Players: [Dust{statistics=Kills: 3, Deaths: 0, Assists: 4}, CraliX{statistics=Kills: 5, Deaths: 1, Assists: 2}, Raven{statistics=Kills: 1, Deaths: 6, Assists: 5}, Ciela{statistics=Kills: 2, Deaths: 4, Assists: 0}, Kra{statistics=Kills: 1, Deaths: 3, Assists: 9}]
-```
+
+`Players: [Dust{statistics=Kills: 3, Deaths: 0, Assists: 4}, CraliX{statistics=Kills: 5, Deaths: 1, Assists: 2}, Raven{statistics=Kills: 1, Deaths: 6, Assists: 5}, Ciela{statistics=Kills: 2, Deaths: 4, Assists: 0}, Kra{statistics=Kills: 1, Deaths: 3, Assists: 9}]`
+
 
 ## Step 9: Player Management
 {:.no_toc}
@@ -633,12 +631,12 @@ Revive is removed from the list. The remaining players are renumbered accordingl
 
 Congratulations! You've successfully:
 
-✓ Built a complete 5-player team roster
-✓ Viewed and searched through your players
-✓ Compared players to make roster decisions
-✓ Drafted a valid team composition
-✓ Recorded player statistics
-✓ Documented match results
+✓ Built a complete 5-player team roster  
+✓ Viewed and searched through your players  
+✓ Compared players to make roster decisions  
+✓ Drafted a valid team composition  
+✓ Recorded player statistics  
+✓ Documented match results  
 
 Your team is now set up and ready for the tournament! You can continue to use DraftDeck to:
 
