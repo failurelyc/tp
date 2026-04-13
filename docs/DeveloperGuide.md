@@ -862,3 +862,5 @@ testers are expected to do more *exploratory* testing.
 4. **Decrement statistics**: Extend the `stats` command to allow for decrements instead of strictly increments, so that users can correct errors in previously entered statistics.
 
 5. **Improved phone field validation**: Improve the phone field validation to better support real-world inputs, such as country extension codes (e.g., `+65`), spaces, and other common phone number formats.
+
+6. **More inclusive name validation**: Loosen the name field validation to be more inclusive of legal name patterns while preserving reliability, such as supporting `s/o` (son of) prefixes and Unicode characters for non-English names.
