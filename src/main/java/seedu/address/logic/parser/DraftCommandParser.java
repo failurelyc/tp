@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.DraftCommand.MESSAGE_INVALID_IGN_EMPTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,33 +22,25 @@ public class DraftCommandParser implements Parser<DraftCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DraftCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DraftCommand.PARAMETERS));
-        }
-
-        String[] argStrings = trimmedArgs.split("\\s+");
-        List<String> identifiers = new ArrayList<>();
-        String prefix = PREFIX_IGN.getPrefix();
-
-        for (String argString : argStrings) {
-            // Handle i/ prefix: validate non-empty, then keep prefix intact
-            if (argString.startsWith(prefix)) {
-                String ign = argString.substring(prefix.length());
-                if (ign.isEmpty()) {
-                    throw new ParseException(MESSAGE_INVALID_IGN_EMPTY);
-                }
-                identifiers.add(argString); // Keep i/ prefix intact
-            } else if (argString.matches("\\d+")) {
-                // Numeric index
-                identifiers.add(ParserUtil.parseIdentifier(argString));
-            } else {
+        try {
+            String trimmedArgs = args.trim();
+            if (trimmedArgs.isEmpty()) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DraftCommand.PARAMETERS));
             }
-        }
 
-        return new DraftCommand(identifiers);
+            String[] argStrings = trimmedArgs.split("\\s+");
+            List<String> identifiers = new ArrayList<>();
+
+            for (String argString : argStrings) {
+                String identifier = ParserUtil.parseIdentifier(argString);
+                identifiers.add(identifier);
+            }
+
+            return new DraftCommand(identifiers);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DraftCommand.PARAMETERS), pe);
+        }
     }
 }

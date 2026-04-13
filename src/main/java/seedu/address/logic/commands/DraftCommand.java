@@ -33,8 +33,6 @@ public class DraftCommand extends Command {
     public static final String EXAMPLE = "Example: " + COMMAND_WORD + " 1 2 i/CarlK77 4 i/ElleM55";
 
     public static final String MESSAGE_SUCCESS = "Draft validation complete: %1$s";
-    public static final String MESSAGE_INVALID_IGN_NOT_FOUND = "Player with IGN '%1$s' not found";
-    public static final String MESSAGE_INVALID_IGN_EMPTY = "IGN cannot be empty. Use format: i/playername";
     public static final String MESSAGE_INVALID_TEAM_SIZE = "Draft requires exactly 5 players. You provided %1$d";
     public static final String MESSAGE_DUPLICATE_PLAYER = "Duplicate player selected: %1$s";
 
