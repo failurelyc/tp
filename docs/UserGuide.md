@@ -212,7 +212,7 @@ Examples:
 * `filter t/friend` Returns people tagged with `friend`
 * `filter r/top r/jungle` Returns people with role `TOP` or `JUNGLE`
 * `filter ent/Ahri ent/Yasuo` Returns people who have statistics for entity `Ahri` or `Yasuo`
-* `filter t/pro r/bot ent/Jinx` Returns people who are tagged `pro`, have role `BOT`, AND have statistics for entity `Jinx`
+* `filter t/pro r/bot ent/Jinx` Rfeturns people who are tagged `pro`, have role `BOT`, AND have statistics for entity `Jinx`
 
 ### Sports and Analytics
 
@@ -367,7 +367,7 @@ Welcome to DraftDeck! This walkthrough will guide you through a realistic scenar
 
 You've just been hired as the team manager for the Singapore National Esports team, ahead of the upcoming Asian Games. Your first task is to:
 
-1. Build a roster of 6 players (5 starters + 1 substitute)
+1. Build a roster of 5 players
 2. Analyze player statistics and compare recruits
 3. Draft a valid team composition
 4. Record match data from practice games
@@ -380,7 +380,7 @@ Let's get started!
 If you ever get stuck on a command, you can use the `help` command!
 </div>
 
-## Step 1: Launch DraftDeck and import the old roster.
+## Step 1: Launch DraftDeck.
 {:.no_toc}
 
 If this is your first time launching the app, then this is done for you already!
