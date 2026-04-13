@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.CommandUtil.MESSAGE_IGN_NOT_FOUND;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DraftCommand.MESSAGE_DUPLICATE_PLAYER;
-import static seedu.address.logic.commands.DraftCommand.MESSAGE_INVALID_IGN_NOT_FOUND;
 import static seedu.address.logic.commands.DraftCommand.MESSAGE_INVALID_TEAM_SIZE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -112,7 +112,7 @@ public class DraftCommandTest {
         DraftCommand draftCommand = new DraftCommand(List.of(invalidIgn));
 
         assertCommandFailure(draftCommand, model,
-                String.format(MESSAGE_INVALID_IGN_NOT_FOUND, "InvalidName"));
+                String.format(MESSAGE_IGN_NOT_FOUND, "InvalidName"));
     }
 
     @Test

@@ -10,6 +10,8 @@ import seedu.address.model.person.Person;
  */
 public class CommandUtil {
 
+    public static final String MESSAGE_IGN_NOT_FOUND = "Player with IGN '%1$s' not found";
+
     /**
      * Finds a person in the address book by either index or IGN.
      *
@@ -27,7 +29,7 @@ public class CommandUtil {
                     return person;
                 }
             }
-            throw new CommandException(String.format("Player with IGN '%1$s' not found", ign));
+            throw new CommandException(String.format(MESSAGE_IGN_NOT_FOUND, ign));
         }
 
         // Check if identifier is an index (numeric)
@@ -45,6 +47,6 @@ public class CommandUtil {
                 return person;
             }
         }
-        throw new CommandException(String.format("Player with IGN '%1$s' not found", identifier));
+        throw new CommandException(String.format(MESSAGE_IGN_NOT_FOUND, identifier));
     }
 }
