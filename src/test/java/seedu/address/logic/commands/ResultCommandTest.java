@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,7 +28,7 @@ public class ResultCommandTest {
     }
 
     @Test
-    public void execute_matchAcceptedByModel_addSuccessful() {
+    public void execute_matchAcceptedByModel_addSuccessful() throws Exception {
         CommandResult commandResult = new ResultCommand(validMatch).execute(typicalModel);
 
         assertEquals(String.format(ResultCommand.MESSAGE_SUCCESS, Messages.format(validMatch)),
@@ -36,11 +37,8 @@ public class ResultCommandTest {
     }
 
     @Test
-    public void execute_missingPerson_throwsCommandException() {
-        CommandResult commandResult = new ResultCommand(validMatch).execute(emptyModel);
-
-        assertEquals(String.format(ResultCommand.MESSAGE_PLAYER_DOES_NOT_EXIST, Messages.format(validMatch)),
-                commandResult.getFeedbackToUser());
+    public void execute_missingPerson_throwsCommandException() throws Exception {
+        assertThrows(CommandException.class, () -> new ResultCommand(validMatch).execute(emptyModel));
     }
 
     @Test
