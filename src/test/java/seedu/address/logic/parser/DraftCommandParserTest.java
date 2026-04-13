@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.DraftCommand.MESSAGE_INVALID_IGN_EMPTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IGN;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_IDENTIFIER;
 
 import java.util.List;
 
@@ -70,11 +68,11 @@ public class DraftCommandParserTest {
 
     @Test
     public void parse_invalidIndex_failure() {
-        assertParseFailure(parser, "0", MESSAGE_INVALID_IDENTIFIER);
+        assertParseFailure(parser, "0", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_emptyIgn_failure() {
-        assertParseFailure(parser, PREFIX_IGN.getPrefix(), MESSAGE_INVALID_IGN_EMPTY);
+        assertParseFailure(parser, PREFIX_IGN.getPrefix(), MESSAGE_INVALID_FORMAT);
     }
 }
