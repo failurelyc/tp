@@ -762,7 +762,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `result w/INVALID i/PlayerA ent/Ahri s/10-2-8 ...`<br>
       Expected: Error message indicating result must be WIN, LOSE, or DRAW.
 
-   1. Test case: `result w/WIN i/NonExistent ent/Ahri s/10-2-8 ...`<br>
+   1. Test case: `result w/WIN i/NonExistent ent/Ahri s/10-2-8 ...` containing five players, one or more of which do not exist.<br>
       Expected: Error message indicating player not found.
 
 ### Data persistence
