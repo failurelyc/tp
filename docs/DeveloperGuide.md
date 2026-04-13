@@ -465,7 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User <ins>lists all players (UC10)</ins>.
 2. User requests to draft a team by selecting 5 players by index or IGN.
-3. DraftDeck validates the team composition and displays the result.
+3. DraftDeck displays a side-by-side view of the team composition and displays the result.
 
    Use case ends.
 
@@ -497,9 +497,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2e. The team composition is invalid (missing roles or duplicate roles).
 
-    * 2e1. DraftDeck displays validation errors showing which roles are missing or duplicated.
+    * 2e1. DraftDeck displays diagnostic messages showing which roles are missing or duplicated.
+    * 2e2. DraftDeck displays a side-by-side view of the team composition.
 
-    Use case ends (validation is still performed).
+    Use case ends.
 
 **Use case: UC08 - Update player statistics**
 
@@ -619,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Data should be automatically saved to JSON files after every modifying command (add, delete, edit, result, stats, clear).
 5.  No data loss should occur upon unexpected application crashes, provided the crash occurs after a command has completed and data has been saved to storage.
-6.  The application should validate all input data before saving (phone/email format, rank validity, role types).
+6.  The application should validate all input data before saving (phone/email format, rank validity, role types, etc.).
 7.  The application should not crash if provided with invalid commands; instead, it should display appropriate error messages.
 8.  New commands can be added by creating command and parser classes and registering them in CommandRegistry without modifying existing command handling logic.
 9. Should support up to 50 different entities/champions per player with command response time not exceeding 2 seconds.
@@ -629,8 +630,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **IGN**: In-Game Name, a player's username in the game. Limited to 16 characters and case-insensitive to align with League of Legends' IGN rules.
+* **Command response time**: The time it takes from entering the command in DraftDeck to when DraftDeck displays the result.
 * **Entity**: An umbrella term for a character that the player plays in the game. In League of Legends, this refers to a 'Champion'. In other games, this may refer to an 'Agent', 'Operator', 'Hero', or whatever term that particular game uses.
+* **IGN**: In-Game Name, a player's username in the game. Limited to 16 characters and case-insensitive to align with League of Legends' IGN rules.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 
 --------------------------------------------------------------------------------------------------------------------
@@ -663,18 +665,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding players
 
-   1. Prerequisites: Players `JohnD88` and `BetsyCrowe` do not exist.
+   1. Prerequisites: Players with IGNs `JohnD88` and `BetsyCrowe` do not exist.
 
    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com i/JohnD88 r/MID rank/GOLD I`<br>
       Expected: Player is added to the list with the specified details.
 
    1. Test case: `add n/Betsy Crowe t/friend e/betsycrowe@example.com i/Betsycrowe r/BOT rank/PLATINUM I p/1234567`<br>
-      Expected: Player is added with the phone field in a different position.
+      Expected: Player is added even with the phone parameter in a different order from the previous test case.
 
 1. Deleting players
 
    1. Test case: `delete 1`<br>
-      Expected: First player is deleted from the list. Details of the deleted player shown in the status message.
+      Expected: The player with index 1 is deleted from the list. Details of the deleted player shown in the status message.
 
    1. Test case: `delete i/PlayerName` (assuming PlayerName exists)<br>
       Expected: The player with IGN "PlayerName" is deleted from the list.
@@ -684,10 +686,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all players using the `list` command.
 
    1. Test case: `edit 1 p/91234567 e/johndoe@example.com`<br>
-      Expected: First player's phone and email are updated.
+      Expected: Phone and email for the player with index 1 is updated.
 
    1. Test case: `edit 2 n/Betsy Crower t/`<br>
-      Expected: Second player's name is updated and all tags are cleared.
+      Expected: Name is updated and all tags are cleared for the player with index 2.
 
    1. Test case: `edit i/PlayerName r/BOT` (assuming PlayerName exists)<br>
       Expected: The player with IGN "PlayerName" has their role updated to BOT.
@@ -743,26 +745,26 @@ testers are expected to do more *exploratory* testing.
 1. Updating player statistics
 
    1. Test case: `stats 1 ent/Ahri k/50 d/10 a/20`<br>
-      Expected: Player 1's Ahri statistics are updated with the specified values.
+      Expected: Ahri statistics for the player with index 1 are updated with the specified values.
 
-   1. Test case: `stats 1 ent/Ahri k/10` (adding to existing stats)<br>
-      Expected: Player 1's Ahri kills are increased by 10 (cumulative).
+   2. Test case: `stats 1 ent/Ahri k/10` (adding to existing stats)<br>
+      Expected: Ahri kills for the player with index 1 are increased by 10 (cumulative).
 
-   1. Test case: `stats i/PlayerName ent/Ahri k/50 d/10 a/20` (assuming PlayerName exists)<br>
+   3. Test case: `stats i/PlayerName ent/Ahri k/50 d/10 a/20` (assuming PlayerName exists)<br>
       Expected: Player with IGN "PlayerName" has their Ahri statistics updated.
 
-1. Adding match results
+2. Adding match results
 
    1. Test case: `result w/WIN i/PlayerA ent/Ahri s/10-2-8 i/PlayerB ent/Leona s/1-1-12 i/PlayerC ent/Evelynn s/5-6-15 i/PlayerD ent/Irelia s/2-19-4 i/PlayerE ent/Kayn s/6-3-8`<br>
       Expected: Match is recorded with WIN result and all player statistics are updated.
 
-   1. Test case: `result w/LOSE i/PlayerA ent/Ahri s/10-2-8 date/2025-12-31` (only 1 player)<br>
+   2. Test case: `result w/LOSE i/PlayerA ent/Ahri s/10-2-8 date/2025-12-31` (only 1 player)<br>
       Expected: Error message indicating exactly 5 players are required.
 
-   1. Test case: `result w/INVALID i/PlayerA ent/Ahri s/10-2-8 ...`<br>
+   3. Test case: `result w/INVALID i/PlayerA ent/Ahri s/10-2-8 ...`<br>
       Expected: Error message indicating result must be WIN, LOSE, or DRAW.
 
-   1. Test case: `result w/WIN i/NonExistent ent/Ahri s/10-2-8 ...`<br>
+   4. Test case: `result w/WIN i/NonExistent ent/Ahri s/10-2-8 ...`<br>
       Expected: Error message indicating player not found.
 
 ### Data persistence
