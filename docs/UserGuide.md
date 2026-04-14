@@ -212,7 +212,7 @@ Examples:
 * `filter t/friend` Returns people tagged with `friend`
 * `filter r/top r/jungle` Returns people with role `TOP` or `JUNGLE`
 * `filter ent/Ahri ent/Yasuo` Returns people who have statistics for entity `Ahri` or `Yasuo`
-* `filter t/pro r/bot ent/Jinx` Rfeturns people who are tagged `pro`, have role `BOT`, AND have statistics for entity `Jinx`
+* `filter t/pro r/bot ent/Jinx` Returns people who are tagged `pro`, have role `BOT`, AND have statistics for entity `Jinx`
 
 ### Sports and Analytics
 
